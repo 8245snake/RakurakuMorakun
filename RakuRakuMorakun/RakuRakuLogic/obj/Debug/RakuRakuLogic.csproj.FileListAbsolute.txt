@@ -1,0 +1,9 @@
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuLogic\bin\Debug\RakuRakuLogic.exe
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuLogic\bin\Debug\RakuRakuLogic.pdb
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuLogic\bin\Debug\RakuRakuMorakun.exe
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuLogic\bin\Debug\RakuRakuMorakun.pdb
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuLogic\obj\Debug\RakuRakuLogic.csprojResolveAssemblyReference.cache
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuLogic\obj\Debug\RakuRakuLogic.csproj.CoreCompileInputs.cache
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuLogic\obj\Debug\RakuRakuLogic.csproj.CopyComplete
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuLogic\obj\Debug\RakuRakuLogic.exe
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuLogic\obj\Debug\RakuRakuLogic.pdb

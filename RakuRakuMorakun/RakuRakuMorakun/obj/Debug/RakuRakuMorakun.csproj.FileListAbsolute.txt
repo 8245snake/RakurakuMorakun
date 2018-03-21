@@ -1,0 +1,11 @@
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\bin\Debug\RakuRakuMorakun.exe
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\bin\Debug\RakuRakuMorakun.pdb
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.csprojResolveAssemblyReference.cache
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.Properties.Resources.resources
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.csproj.GenerateResource.cache
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.csproj.CoreCompileInputs.cache
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.exe
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.pdb
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.frmMain.resources
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.frmPreview.resources
+C:\Users\Shingo\source\repos\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.frmEditCondition.resources
