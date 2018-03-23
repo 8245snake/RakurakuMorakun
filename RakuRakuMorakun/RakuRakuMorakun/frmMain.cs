@@ -80,8 +80,7 @@ namespace RakuRakuMorakun
         {
             string[] stResult;
             stResult = controller.CreateResultArr(grdMain, txtTemplate.Text);
-            frmPreview.PreviewText = string.Join("\r\n", stResult);
-            
+            frmPreview.PreviewText = string.Join("\r\n", stResult);   
         }
 
         //テンプレートが編集されたらリアルタイムでプレビューする
@@ -185,31 +184,21 @@ namespace RakuRakuMorakun
             SetCellText(e.ColumnIndex, e.RowIndex);
         }
 
-
         //セルの内容をテキストボックスに出力
         private void SetCellText(int nCol, int nRow)
         {
             if(nCol < 0 || nRow < 0){ return; }
-            if (grdMain[nCol,nRow].Value != null)
-            {
-                txtCellText.Text = grdMain[nCol, nRow].Value.ToString();
-            }
-            else
-            {
-                txtCellText.Text = "";
-            }
+            txtCellText.Text = (grdMain[nCol, nRow].Value != null) ? grdMain[nCol, nRow].Value.ToString() : "";
         }
 
         //セルが編集モードになったとき最初に呼ばれる
         private void grdMain_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            grdMain[e.ColumnIndex, e.RowIndex].Style.BackColor = System.Drawing.Color.White;
         }
 
         //CellBeginEditの次に呼ばれる
         private void grdMain_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            CblCellEditingFlag = true;
 
             //表示されているコントロールがDataGridViewTextBoxEditingControlか調べる
             if (e.Control is DataGridViewTextBoxEditingControl)
@@ -229,7 +218,8 @@ namespace RakuRakuMorakun
 
         private void Cell_TextChanged(object sender, EventArgs e)
         {
-            txtCellText.Text = ((DataGridViewTextBoxEditingControl)sender).EditingControlFormattedValue.ToString();
+            CblCellEditingFlag = true;
+            txtCellText.Text = ((DataGridViewTextBoxEditingControl)sender).Text;
         }
 
         private void txtCellText_TextChanged(object sender, EventArgs e)
@@ -243,20 +233,16 @@ namespace RakuRakuMorakun
                 cell.Value = txtCellText.Text;
                 return;
             }
-
         }
-
 
         //セルの編集が終わったときは更新
         private void grdMain_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             CblCellEditingFlag = false;
             SetCellText(e.ColumnIndex, e.RowIndex);
-
             //更新
             UpdateForm();
         }
-
 
         private void UpdateForm()
         {
@@ -270,6 +256,7 @@ namespace RakuRakuMorakun
             frmPreview.PreviewText = string.Join("\r\n", stResult);
         }
 
+        //ショートカットキーなど
         private void grdMain_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Delete || e.KeyData == Keys.Back) //Delete、BackSpace
@@ -280,11 +267,28 @@ namespace RakuRakuMorakun
                     cell.Value = null;
                 }
             }
-            else if (e.KeyCode == Keys.V && e.Control) //Ctr + V
+            else if (e.KeyCode == Keys.V && e.Control) //Ctr + V（ペースト）
             {
                 controller.PasteGrid(grdMain);
             }
+            else if (e.KeyCode == Keys.C && e.Control) //Ctr + C（コピー）
+            {
+                controller.CopyGrid(grdMain);
+            }
+        }
 
+        //列を左と交換
+        private void cmdMoveLeft_Click(object sender, EventArgs e)
+        {
+            controller.MoveColumn(grdMain, -1);
+            UpdateForm();
+        }
+
+        //列を右と交換
+        private void cmdMoveRight_Click(object sender, EventArgs e)
+        {
+            controller.MoveColumn(grdMain, 1);
+            UpdateForm();
         }
     }
 }

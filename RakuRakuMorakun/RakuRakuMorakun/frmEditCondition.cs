@@ -114,7 +114,7 @@ namespace RakuRakuMorakun
             {
                 combCondition.Items.Add(stNames[i]);
             }
-            combCondition.SelectedIndex = 0;
+            combCondition.SelectedIndex = (stNames.Length > 0)? 0 : -1;
 
             //combItemは別のイベントで
 

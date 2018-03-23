@@ -8,7 +8,7 @@ namespace RakuRakuMorakun
 {
     public static class Common
     {
-        public static readonly string SEQUENCE_CAPTION = "シーケンス値が";
+        public static readonly string SEQUENCE_CAPTION = "番号が";
         public static readonly string EQUAL = "と等しいとき";
         public static readonly string NOTEQUAL = "と異なるとき";
         public static readonly string UNDER = "より小さいとき";

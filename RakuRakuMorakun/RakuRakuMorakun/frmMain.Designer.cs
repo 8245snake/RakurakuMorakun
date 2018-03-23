@@ -49,6 +49,8 @@
             this.chkPreview = new System.Windows.Forms.CheckBox();
             this.cmdValidAll = new System.Windows.Forms.Button();
             this.txtCellText = new System.Windows.Forms.TextBox();
+            this.cmdMoveLeft = new System.Windows.Forms.Button();
+            this.cmdMoveRight = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdCondition)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +74,7 @@
             this.grdMain.RowHeadersVisible = false;
             this.grdMain.RowTemplate.Height = 21;
             this.grdMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.grdMain.Size = new System.Drawing.Size(404, 426);
+            this.grdMain.Size = new System.Drawing.Size(404, 302);
             this.grdMain.TabIndex = 0;
             this.grdMain.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.grdMain_CellBeginEdit);
             this.grdMain.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdMain_CellClick);
@@ -145,11 +147,11 @@
             // 
             this.txtTemplate.AcceptsReturn = true;
             this.txtTemplate.AcceptsTab = true;
-            this.txtTemplate.Font = new System.Drawing.Font("メイリオ", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtTemplate.Location = new System.Drawing.Point(439, 263);
+            this.txtTemplate.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txtTemplate.Location = new System.Drawing.Point(439, 236);
             this.txtTemplate.Multiline = true;
             this.txtTemplate.Name = "txtTemplate";
-            this.txtTemplate.Size = new System.Drawing.Size(624, 275);
+            this.txtTemplate.Size = new System.Drawing.Size(624, 178);
             this.txtTemplate.TabIndex = 7;
             this.txtTemplate.TextChanged += new System.EventHandler(this.txtTemplate_TextChanged);
             // 
@@ -173,7 +175,7 @@
             this.grdCondition.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.grdCondition.RowTemplate.Height = 21;
             this.grdCondition.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdCondition.Size = new System.Drawing.Size(624, 169);
+            this.grdCondition.Size = new System.Drawing.Size(624, 145);
             this.grdCondition.TabIndex = 8;
             this.grdCondition.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCondition_CellDoubleClick);
             // 
@@ -204,7 +206,7 @@
             // 
             // cmdStart
             // 
-            this.cmdStart.Location = new System.Drawing.Point(899, 544);
+            this.cmdStart.Location = new System.Drawing.Point(899, 434);
             this.cmdStart.Name = "cmdStart";
             this.cmdStart.Size = new System.Drawing.Size(164, 27);
             this.cmdStart.TabIndex = 9;
@@ -216,7 +218,7 @@
             // 
             this.lblCount.AutoSize = true;
             this.lblCount.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblCount.Location = new System.Drawing.Point(296, 547);
+            this.lblCount.Location = new System.Drawing.Point(296, 426);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(120, 24);
             this.lblCount.TabIndex = 10;
@@ -245,7 +247,7 @@
             // chkPreview
             // 
             this.chkPreview.AutoSize = true;
-            this.chkPreview.Location = new System.Drawing.Point(439, 552);
+            this.chkPreview.Location = new System.Drawing.Point(439, 434);
             this.chkPreview.Name = "chkPreview";
             this.chkPreview.Size = new System.Drawing.Size(92, 16);
             this.chkPreview.TabIndex = 13;
@@ -272,11 +274,33 @@
             this.txtCellText.TabIndex = 15;
             this.txtCellText.TextChanged += new System.EventHandler(this.txtCellText_TextChanged);
             // 
+            // cmdMoveLeft
+            // 
+            this.cmdMoveLeft.Location = new System.Drawing.Point(493, 16);
+            this.cmdMoveLeft.Name = "cmdMoveLeft";
+            this.cmdMoveLeft.Size = new System.Drawing.Size(57, 27);
+            this.cmdMoveLeft.TabIndex = 16;
+            this.cmdMoveLeft.Text = "←";
+            this.cmdMoveLeft.UseVisualStyleBackColor = true;
+            this.cmdMoveLeft.Click += new System.EventHandler(this.cmdMoveLeft_Click);
+            // 
+            // cmdMoveRight
+            // 
+            this.cmdMoveRight.Location = new System.Drawing.Point(556, 17);
+            this.cmdMoveRight.Name = "cmdMoveRight";
+            this.cmdMoveRight.Size = new System.Drawing.Size(63, 27);
+            this.cmdMoveRight.TabIndex = 17;
+            this.cmdMoveRight.Text = "→";
+            this.cmdMoveRight.UseVisualStyleBackColor = true;
+            this.cmdMoveRight.Click += new System.EventHandler(this.cmdMoveRight_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1087, 580);
+            this.ClientSize = new System.Drawing.Size(1087, 482);
+            this.Controls.Add(this.cmdMoveRight);
+            this.Controls.Add(this.cmdMoveLeft);
             this.Controls.Add(this.txtCellText);
             this.Controls.Add(this.cmdValidAll);
             this.Controls.Add(this.chkPreview);
@@ -325,5 +349,7 @@
         private System.Windows.Forms.CheckBox chkPreview;
         private System.Windows.Forms.Button cmdValidAll;
         private System.Windows.Forms.TextBox txtCellText;
+        private System.Windows.Forms.Button cmdMoveLeft;
+        private System.Windows.Forms.Button cmdMoveRight;
     }
 }

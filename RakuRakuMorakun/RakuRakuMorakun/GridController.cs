@@ -318,6 +318,43 @@ namespace RakuRakuMorakun
                 grdCondition[2, nRow].Value = CtpConditionArr[nRow].TrueText;
                 grdCondition[3, nRow].Value = CtpConditionArr[nRow].FalseText;
             }
+        }
+
+        public void MoveColumn(DataGridView grdMain, int nDirectionParam)
+        {
+            DataGridViewCell cell = GetSelectedCell(grdMain);
+            if (cell == null) { return; }
+            int nSelectedCol = cell.ColumnIndex;
+            int nSelectedRow = cell.RowIndex;
+
+            if (nSelectedCol + nDirectionParam < 0 || nSelectedCol + nDirectionParam >= grdMain.ColumnCount) { return; }
+
+            object objCellValueBuff;
+            string stCellValueBuff = "";
+            Color color;
+
+            //タイトルも入れ替える
+            stCellValueBuff = grdMain.Columns[nSelectedCol+ nDirectionParam].HeaderText;
+            grdMain.Columns[nSelectedCol + nDirectionParam].HeaderText = grdMain.Columns[nSelectedCol].HeaderText;
+            grdMain.Columns[nSelectedCol].HeaderText = stCellValueBuff;
+
+            for (int nRow = 0; nRow < grdMain.Rows.Count; nRow++)
+            {
+                //セルの値を入れ替える
+                objCellValueBuff = grdMain[nSelectedCol + nDirectionParam, nRow].Value;
+                stCellValueBuff = (objCellValueBuff != null)? objCellValueBuff.ToString() : "";
+                grdMain[nSelectedCol + nDirectionParam, nRow].Value = grdMain[nSelectedCol, nRow].Value;
+                grdMain[nSelectedCol, nRow].Value = stCellValueBuff;
+
+                //セルの色を入れ替える
+                color = grdMain[nSelectedCol + nDirectionParam, nRow].Style.BackColor;
+                grdMain[nSelectedCol + nDirectionParam, nRow].Style.BackColor = grdMain[nSelectedCol, nRow].Style.BackColor;
+                grdMain[nSelectedCol, nRow].Style.BackColor = color;
+            }
+
+            //セル選択もずらす
+            grdMain.ClearSelection();
+            grdMain[nSelectedCol + nDirectionParam, nSelectedRow].Selected = true;
 
         }
 
@@ -398,8 +435,6 @@ namespace RakuRakuMorakun
             {
                 PasteRow(grdDataGrid, i + nSelectedRow, stRowsArr[i]);
             }
-
-
         }
 
         //改行区切りの1列を貼り付ける。行数をオーバーするときは追加する
@@ -420,7 +455,56 @@ namespace RakuRakuMorakun
             {
                 grdDataGrid[i + nSelectedColumn, nRow].Value = stColsArr[i];
             }
+        }
 
+        //クリップボードにコピー
+        public void CopyGrid(DataGridView grdDataGrid)
+        {
+            int nColMin = -1;
+            int nColMax = -1;
+            int nRowmin = -1;
+            int nRowMax = -1;
+            string stBuff = "";
+            string stRowText = "";
+            string stResult = "";
+
+            //セルの選択範囲を見つける
+            foreach (DataGridViewCell cell in grdDataGrid.SelectedCells)
+            {
+                if (nColMin < 0)
+                {
+                    nColMin = cell.ColumnIndex;
+                    nColMax = cell.ColumnIndex;
+                    nRowmin = cell.ColumnIndex;
+                    nRowMax = cell.ColumnIndex;
+                    continue;
+                }
+
+                nColMin = (nColMin > cell.ColumnIndex) ? cell.ColumnIndex : nColMin;
+                nColMax = (nColMax < cell.ColumnIndex) ? nColMax : cell.ColumnIndex;
+                nRowmin = (nRowmin > cell.RowIndex) ? cell.RowIndex : nRowmin;
+                nRowMax = (nRowMax < cell.RowIndex) ? nRowMax : cell.RowIndex;
+            }
+
+            if (nColMin < 0) { return; } //何も選択されていない
+
+            for (int nRow = nRowmin; nRow <= nRowMax; nRow++)
+            {
+                for (int nCol = nColMin; nCol <= nColMax; nCol++)
+                {
+                    stBuff = (grdDataGrid[nCol, nRow].Value != null) ? grdDataGrid[nCol, nRow].Value.ToString() : "";
+
+                    if (stRowText != "")  { stRowText += "\t" + stBuff;  }
+                    else { stRowText += stBuff;  }
+                    
+                }
+
+                if (stResult != "") {stResult += "\r\n" + stRowText; }
+                else {stResult += stRowText;}
+
+            }
+
+            Clipboard.SetText(stResult);
 
         }
 
