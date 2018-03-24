@@ -11,7 +11,6 @@ namespace RakuRakuMorakun
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Eval(" new Date(2017,0,15,22,30)"));
             Console.ReadKey();
         }
     }

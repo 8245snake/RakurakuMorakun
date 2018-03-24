@@ -38,7 +38,8 @@ namespace RakuRakuMorakun
         {
             controller.InvalidEmptyCell(grdMain);
             //更新
-            UpdateForm();
+            UpdateGridData();
+            UpdatePreview();
         }
 
         //列追加ボタン
@@ -46,28 +47,32 @@ namespace RakuRakuMorakun
         {
             controller.AddColumn(grdMain);
             //更新
-            UpdateForm();
+            UpdateGridData();
+            UpdatePreview();
         }
 
         private void cmdDeleteColumn_Click(object sender, EventArgs e)
         {
             controller.DeleteColumn(grdMain);
             //更新
-            UpdateForm();
+            UpdateGridData();
+            UpdatePreview();
         }
 
         private void cmdValid_Click(object sender, EventArgs e)
         {
             controller.ValidCells(grdMain);
             //更新
-            UpdateForm();
+            UpdateGridData();
+            UpdatePreview();
         }
 
         private void cmdInvalid_Click(object sender, EventArgs e)
         {
             controller.InvalidCells(grdMain);
             //更新
-            UpdateForm();
+            UpdateGridData();
+            UpdatePreview();
         }
 
         public bool PreviewChecked{
@@ -78,6 +83,7 @@ namespace RakuRakuMorakun
         //開始ボタン
         private void cmdStart_Click(object sender, EventArgs e)
         {
+            //全件取得
             string[] stResult;
             stResult = controller.CreateResultArr(grdMain, txtTemplate.Text);
             frmPreview.PreviewText = string.Join("\r\n", stResult);   
@@ -86,20 +92,16 @@ namespace RakuRakuMorakun
         //テンプレートが編集されたらリアルタイムでプレビューする
         private void txtTemplate_TextChanged(object sender, EventArgs e)
         {
-            string[] stResult;
-            stResult = controller.CreateResultArr(grdMain, txtTemplate.Text, 3);
-            frmPreview.PreviewText = string.Join("\r\n", stResult);
+            UpdatePreview();
         }
 
+        //プレビュー表示チェックボックス
         private void chkPreview_CheckedChanged(object sender, EventArgs e)
         {
             if (chkPreview.Checked)
             {
-                string[] stResult;
-                stResult = controller.CreateResultArr(grdMain, txtTemplate.Text, 3);
-
-                frmPreview.PreviewText = string.Join("\r\n", stResult);
                 frmPreview.Show();
+                UpdatePreview();
             }
             else
             {
@@ -121,7 +123,7 @@ namespace RakuRakuMorakun
             controller.SetConditionToGrid(grdCondition);
 
             //更新
-            UpdateForm();
+            UpdateGridData();
         }
 
 
@@ -161,7 +163,8 @@ namespace RakuRakuMorakun
         {
             controller.ValidNotEmptyCell(grdMain);
             //更新
-            UpdateForm();
+            UpdateGridData();
+            UpdatePreview();
         }
 
         //全て有効化
@@ -169,7 +172,8 @@ namespace RakuRakuMorakun
         {
             controller.ValidAllCell(grdMain);
             //更新
-            UpdateForm();
+            UpdateGridData();
+            UpdatePreview();
         }
 
         //セルがクリックされたら内容を表示
@@ -241,20 +245,28 @@ namespace RakuRakuMorakun
             CblCellEditingFlag = false;
             SetCellText(e.ColumnIndex, e.RowIndex);
             //更新
-            UpdateForm();
+            UpdateGridData();
+            UpdatePreview();
         }
 
-        private void UpdateForm()
+        private void UpdateGridData()
         {
             //グリッドの情報を取り込む
             controller.GetDataFromGrid(grdMain);
             //キャプション更新
             lblCount.Text = string.Format(TEXT_FORMAT_TOTAL_COUNT, controller.Total);
-            //プレビュー更新
+        }
+
+        //プレビュー更新
+        private void UpdatePreview(int nGetCount = 5)
+        {
+            if (!frmPreview.Visible) { return; }
+
             string[] stResult;
-            stResult = controller.CreateResultArr(grdMain, txtTemplate.Text, 3);
+            stResult = controller.CreateResultArr(grdMain, txtTemplate.Text, nGetCount);
             frmPreview.PreviewText = string.Join("\r\n", stResult);
         }
+
 
         //ショートカットキーなど
         private void grdMain_KeyDown(object sender, KeyEventArgs e)
@@ -281,14 +293,14 @@ namespace RakuRakuMorakun
         private void cmdMoveLeft_Click(object sender, EventArgs e)
         {
             controller.MoveColumn(grdMain, -1);
-            UpdateForm();
+            UpdateGridData();
         }
 
         //列を右と交換
         private void cmdMoveRight_Click(object sender, EventArgs e)
         {
             controller.MoveColumn(grdMain, 1);
-            UpdateForm();
+            UpdateGridData();
         }
     }
 }

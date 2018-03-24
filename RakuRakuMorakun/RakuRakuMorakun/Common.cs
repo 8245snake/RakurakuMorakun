@@ -22,6 +22,7 @@ namespace RakuRakuMorakun
         public static readonly string TEXT_FORMAT_ITERATOR = "{{#{0}}}";   //｛｝は｛｝でエスケープするらしい
         public static readonly string TEXT_FORMAT_CONDITION = "{{${0}}}";
         public static readonly string TEXT_FORMAT_FOMULA = "{{={0}}}";
+        private static readonly Microsoft.JScript.Vsa.VsaEngine VsaEngine = Microsoft.JScript.Vsa.VsaEngine.CreateEngine();
 
 
         /// <summary>バイナリシリアライズを使って任意の型Tのオブジェクトを複製する</summary>
@@ -42,12 +43,22 @@ namespace RakuRakuMorakun
             }
         }
 
-        public static string Eval(string stExpression)
+        //任意の文字を式に埋め込むことができるstKeyをstValueに変える
+        public static string Eval(string stExpression, string stKey = "", string stValue = "")
         {
-            Microsoft.JScript.Vsa.VsaEngine ve = Microsoft.JScript.Vsa.VsaEngine.CreateEngine();
-            var result = Microsoft.JScript.Eval.JScriptEvaluate( stExpression, ve);
+            try
+            {
+                if (stKey != "")
+                {
+                    stExpression = stExpression.Replace(stKey, stValue);
+                }
+                return Microsoft.JScript.Eval.JScriptEvaluate(stExpression, VsaEngine).ToString();
+            }
+            catch
+            {
+                return "";
+            }
 
-            return result.ToString();
         }
     }
 
