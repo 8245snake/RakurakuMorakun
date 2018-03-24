@@ -351,6 +351,46 @@ namespace RakuRakuMorakun
         }
 
         /// //////////////////////////////////////////////////////////////////////////////////////
+        /// メニュー関係のイベント
+        /// //////////////////////////////////////////////////////////////////////////////////////
+
+        //入力支援
+        private void InputAssist_Click(object sender, EventArgs e)
+        {
+            frmInputAssist.Instance.Show();
+        }
+
+        //保存
+        private void Save_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FileName = "rakuraku.xml";
+            ofd.Filter = "XMLファイル(*.xml)|*.xml";
+            ofd.Title = "ファイルの保存先を設定してください";
+
+            //ダイアログを表示する
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                SaveXML(ofd.FileName);
+            }
+        }
+
+        //ファイルを開く
+        private void Open_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FileName = "rakuraku.xml";
+            ofd.Filter = "XMLファイル(*.xml)|*.xml";
+            ofd.Title = "開くファイルを選択してください";
+
+            //ダイアログを表示する
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                LoadXML(ofd.FileName);
+            }
+        }
+
+        /// //////////////////////////////////////////////////////////////////////////////////////
         /// その他関数
         /// //////////////////////////////////////////////////////////////////////////////////////
 
@@ -374,6 +414,25 @@ namespace RakuRakuMorakun
             frmPreview.PreviewText = stResult;
 
             if (blClipboardCopyFlag) { Clipboard.SetText(stResult); }
+        }
+
+
+        //XMLに保存
+        public void SaveXML(string stPath)
+        {
+            controller.Template = txtTemplate.Text;
+            SaveSerializeData(stPath, controller);
+        }
+
+        //XMLデータから取得してフォームに反映
+        public void LoadXML(string stPath)
+        {
+            controller = DeserializeData<GridController>(stPath);
+            controller.SetDataToGrid(grdMain);
+            controller.SetConditionToGrid(grdCondition);
+            controller.SetSequenceToGrid(grdSequence);
+            txtTemplate.Text = controller.Template;
+            UpdateGridData();
         }
 
 

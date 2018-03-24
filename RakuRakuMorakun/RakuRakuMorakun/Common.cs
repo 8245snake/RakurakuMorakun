@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization.Formatters.Soap;
 using System.Text;
 
 namespace RakuRakuMorakun
@@ -61,6 +63,28 @@ namespace RakuRakuMorakun
                 return "";
             }
 
+        }
+
+
+        public static void SaveSerializeData(string stPath ,object objData)
+        {
+            SoapFormatter formatter = new SoapFormatter();
+            using (Stream stream = new FileStream(stPath, FileMode.Create))
+            {
+                formatter.Serialize(stream, objData);
+            }
+        }
+
+        public static T DeserializeData<T>(string stPath)
+            where T : class
+        {
+            SoapFormatter formatter = new SoapFormatter();
+            T objRtn;
+            using (Stream stream = new FileStream(stPath, FileMode.Open))
+            {
+                objRtn = (T)formatter.Deserialize(stream);
+            }
+            return objRtn;
         }
     }
 

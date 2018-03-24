@@ -35,6 +35,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,6 +76,12 @@
       <DependentUpon>frmPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="GridController.cs" />
+    <Compile Include="frmInputAssist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInputAssist.Designer.cs">
+      <DependentUpon>frmInputAssist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sequence.cs" />
@@ -83,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditSequence.resx">
       <DependentUpon>frmEditSequence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInputAssist.resx">
+      <DependentUpon>frmInputAssist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

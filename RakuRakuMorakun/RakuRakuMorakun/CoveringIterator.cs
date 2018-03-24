@@ -6,6 +6,7 @@ using System.Text;
 namespace RakuRakuMorakun
 {
     //反復子クラス
+    [Serializable]
     public class CoveringIterator
     {
         private string CstName;

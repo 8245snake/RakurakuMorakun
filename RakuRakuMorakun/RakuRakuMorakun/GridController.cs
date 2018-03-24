@@ -8,16 +8,20 @@ using static RakuRakuMorakun.Common;
 
 namespace RakuRakuMorakun
 {
+    [Serializable]
     public class GridController
     {
         private DataTable CtpDataTable;   //反復子
         private Condition[] CtpConditionArr;  //条件付き文字列
         private Sequence[] CtpSequenceArr;  //シーケンス
-        private readonly Color cEnable = Color.White;  //有効セルの色
-        private readonly Color cDisenable = Color.Gray;  //無効セルの色
+
         private int CnIteratorCount;  //反復子をカウント
         private int CnConditionCount; //条件付き文字列のカウント
         private int CnSequenceCount; //シーケンスのカウント
+        private string CstTemplate = ""; //テンプレート文字列（ファイル保存用）
+
+        private readonly Color cEnable = Color.White;  //有効セルの色
+        private readonly Color cDisenable = Color.Gray;  //無効セルの色
 
         public GridController(){
             CtpDataTable = new DataTable();
@@ -34,6 +38,7 @@ namespace RakuRakuMorakun
 
         public long Total { get { return CtpDataTable.Total; } }
         public string[] Names { get { return CtpDataTable.GetNames(); } }
+        public string Template { get { return CstTemplate; } set { CstTemplate = value; } }
 
         /// //////////////////////////////////////////////////////////////////////////////////////
         /// 反復子

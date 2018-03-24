@@ -47,7 +47,8 @@ namespace RakuRakuMorakun
             //グリッド初期化
             grdSeqItems.Rows.Clear();
 
-            for (int nRow = 0; nRow < CtpController.Total; nRow++)
+            long lTotal = CtpController.Total;
+            for (int nRow = 0; nRow < lTotal; nRow++)
             {
                 grdSeqItems.Rows.Add();
                 grdSeqItems.Rows[nRow].HeaderCell.Value = (nRow + 1).ToString();

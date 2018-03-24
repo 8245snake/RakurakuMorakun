@@ -5,6 +5,7 @@ using System.Text;
 
 namespace RakuRakuMorakun
 {
+    [Serializable]
     public class Sequence
     {
         private string CstName;

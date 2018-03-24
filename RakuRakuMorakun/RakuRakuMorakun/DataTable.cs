@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace RakuRakuMorakun
 {
+    [Serializable]
     public class DataTable
     {
         public enum INDEX_FLAG : int { NEXT, END };
