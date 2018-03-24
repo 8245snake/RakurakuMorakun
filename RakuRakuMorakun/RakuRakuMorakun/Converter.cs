@@ -11,21 +11,17 @@ namespace RakuRakuMorakun
     public static class Converter
     {
         //DataTableオブジェクトを元にしてテンプレート内の置換を行う。カウントアップは呼び出し元で行う。
-        public static string ConvertStrData(string stTemplate, DataTable tpData, Condition[] tpConditions = null)
+        public static string ConvertStrData(string stTemplate, DataTable tpData, Condition[] tpConditions = null, Sequence[] tpSeqences = null)
         {
             if (stTemplate.Length < 1) { return ""; }
-
-            Dictionary<string, string> dicNameValue = tpData.GetDictOfNowIndex();
+            
             long lCount = tpData.Index + 1;
 
             //条件付き文字列の置換
-            if (tpConditions != null)
-            {
-                for (int i = 0; i < tpConditions.Length; i++)
-                {
-                    stTemplate = stTemplate.Replace(tpConditions[i].Name, tpConditions[i].GetResultString(tpData));
-                }
-            }
+            stTemplate = ReplaceCondition(stTemplate, tpData, tpConditions);
+
+            //シーケンスの置換
+            stTemplate = ReplaceSequence(stTemplate, tpSeqences, lCount);
 
             //番号の置換
             stTemplate = ReplaceNumber(stTemplate, lCount);
@@ -34,9 +30,20 @@ namespace RakuRakuMorakun
             stTemplate = EvaluateExpression(stTemplate, lCount);
 
             //反復子の置換
-            foreach (KeyValuePair<string, string> pair in dicNameValue)
+            stTemplate = ReplaceIterator(stTemplate, tpData);
+
+            return stTemplate;
+        }
+
+
+        //条件付き文字列の置換
+        private static string ReplaceCondition(string stTemplate, DataTable tpData, Condition[] tpConditions)
+        {
+            if (tpConditions == null) { return stTemplate; }
+
+            for (int i = 0; i < tpConditions.Length; i++)
             {
-                stTemplate = stTemplate.Replace(pair.Key, pair.Value);
+                stTemplate = stTemplate.Replace(tpConditions[i].Name, tpConditions[i].GetResultString(tpData));
             }
 
             return stTemplate;
@@ -65,6 +72,19 @@ namespace RakuRakuMorakun
             return stTemplate;
         }
 
+        //シーケンスを置換する
+        private static string ReplaceSequence(string stTemplate, Sequence[] tpSeqences, long lNumber)
+        {
+            if (tpSeqences == null) { return stTemplate; }
+
+            for (int i = 0; i < tpSeqences.Length; i++)
+            {
+                stTemplate = stTemplate.Replace(tpSeqences[i].Name, tpSeqences[i].Item((int)lNumber-1));
+            }
+
+            return stTemplate;
+        } 
+
         //式を評価して置換する
         private static string EvaluateExpression(string stTemplate, long lNumber)
         {
@@ -85,6 +105,20 @@ namespace RakuRakuMorakun
 
                 //次に一致する対象を検索
                 match = match.NextMatch();
+            }
+
+            return stTemplate;
+        }
+
+        //反復子の置換
+        private static string ReplaceIterator(string stTemplate, DataTable tpData)
+        {
+            Dictionary<string, string> dicNameValue = tpData.GetDictOfNowIndex();
+
+            //反復子の置換
+            foreach (KeyValuePair<string, string> pair in dicNameValue)
+            {
+                stTemplate = stTemplate.Replace(pair.Key, pair.Value);
             }
 
             return stTemplate;

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grdMain = new System.Windows.Forms.DataGridView();
             this.cmdAllGrayOut = new System.Windows.Forms.Button();
             this.cmdInvalid = new System.Windows.Forms.Button();
@@ -38,6 +38,10 @@
             this.cmdDeleteColumn = new System.Windows.Forms.Button();
             this.txtTemplate = new System.Windows.Forms.TextBox();
             this.grdCondition = new System.Windows.Forms.DataGridView();
+            this.ConditionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrueText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FalseText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmdStart = new System.Windows.Forms.Button();
             this.lblCount = new System.Windows.Forms.Label();
             this.cmdAddCondition = new System.Windows.Forms.Button();
@@ -54,12 +58,10 @@
             this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ConditionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TrueText = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FalseText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmdDeleteSequence = new System.Windows.Forms.Button();
             this.cmdAddSequence = new System.Windows.Forms.Button();
+            this.編集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.入力支援ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdCondition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSequence)).BeginInit();
@@ -71,14 +73,14 @@
             this.grdMain.AllowUserToDeleteRows = false;
             this.grdMain.AllowUserToResizeColumns = false;
             this.grdMain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.grdMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdMain.Location = new System.Drawing.Point(12, 99);
             this.grdMain.Name = "grdMain";
@@ -181,6 +183,33 @@
             this.grdCondition.TabIndex = 8;
             this.grdCondition.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCondition_CellDoubleClick);
             // 
+            // ConditionName
+            // 
+            this.ConditionName.HeaderText = "名前";
+            this.ConditionName.Name = "ConditionName";
+            this.ConditionName.ReadOnly = true;
+            this.ConditionName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ConditionName.Width = 70;
+            // 
+            // Condition
+            // 
+            this.Condition.HeaderText = "条件";
+            this.Condition.Name = "Condition";
+            this.Condition.ReadOnly = true;
+            this.Condition.Width = 200;
+            // 
+            // TrueText
+            // 
+            this.TrueText.HeaderText = "Trueのとき";
+            this.TrueText.Name = "TrueText";
+            this.TrueText.ReadOnly = true;
+            // 
+            // FalseText
+            // 
+            this.FalseText.HeaderText = "Falseのとき";
+            this.FalseText.Name = "FalseText";
+            this.FalseText.ReadOnly = true;
+            // 
             // cmdStart
             // 
             this.cmdStart.Location = new System.Drawing.Point(822, 648);
@@ -195,7 +224,7 @@
             // 
             this.lblCount.AutoSize = true;
             this.lblCount.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblCount.Location = new System.Drawing.Point(358, 371);
+            this.lblCount.Location = new System.Drawing.Point(12, 371);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(130, 24);
             this.lblCount.TabIndex = 10;
@@ -203,7 +232,7 @@
             // 
             // cmdAddCondition
             // 
-            this.cmdAddCondition.Location = new System.Drawing.Point(507, 210);
+            this.cmdAddCondition.Location = new System.Drawing.Point(507, 216);
             this.cmdAddCondition.Name = "cmdAddCondition";
             this.cmdAddCondition.Size = new System.Drawing.Size(103, 28);
             this.cmdAddCondition.TabIndex = 11;
@@ -213,7 +242,7 @@
             // 
             // cmdDeleteCondition
             // 
-            this.cmdDeleteCondition.Location = new System.Drawing.Point(616, 210);
+            this.cmdDeleteCondition.Location = new System.Drawing.Point(616, 216);
             this.cmdDeleteCondition.Name = "cmdDeleteCondition";
             this.cmdDeleteCondition.Size = new System.Drawing.Size(103, 28);
             this.cmdDeleteCondition.TabIndex = 12;
@@ -263,17 +292,21 @@
             // 
             // grdSequence
             // 
+            this.grdSequence.AllowUserToAddRows = false;
             this.grdSequence.AllowUserToDeleteRows = false;
             this.grdSequence.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdSequence.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SeqName,
             this.SeqValue});
             this.grdSequence.Location = new System.Drawing.Point(504, 74);
+            this.grdSequence.MultiSelect = false;
             this.grdSequence.Name = "grdSequence";
             this.grdSequence.RowHeadersVisible = false;
             this.grdSequence.RowTemplate.Height = 21;
+            this.grdSequence.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdSequence.Size = new System.Drawing.Size(495, 115);
             this.grdSequence.TabIndex = 18;
+            this.grdSequence.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdSequence_CellDoubleClick);
             // 
             // SeqName
             // 
@@ -297,7 +330,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ファイルToolStripMenuItem});
+            this.ファイルToolStripMenuItem,
+            this.編集ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1011, 24);
@@ -316,59 +350,48 @@
             // 保存ToolStripMenuItem
             // 
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存ToolStripMenuItem.Text = "保存";
             // 
             // 開くToolStripMenuItem
             // 
             this.開くToolStripMenuItem.Name = "開くToolStripMenuItem";
-            this.開くToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.開くToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.開くToolStripMenuItem.Text = "開く";
-            // 
-            // ConditionName
-            // 
-            this.ConditionName.HeaderText = "名前";
-            this.ConditionName.Name = "ConditionName";
-            this.ConditionName.ReadOnly = true;
-            this.ConditionName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ConditionName.Width = 70;
-            // 
-            // Condition
-            // 
-            this.Condition.HeaderText = "条件";
-            this.Condition.Name = "Condition";
-            this.Condition.ReadOnly = true;
-            this.Condition.Width = 200;
-            // 
-            // TrueText
-            // 
-            this.TrueText.HeaderText = "Trueのとき";
-            this.TrueText.Name = "TrueText";
-            this.TrueText.ReadOnly = true;
-            // 
-            // FalseText
-            // 
-            this.FalseText.HeaderText = "Falseのとき";
-            this.FalseText.Name = "FalseText";
-            this.FalseText.ReadOnly = true;
             // 
             // cmdDeleteSequence
             // 
-            this.cmdDeleteSequence.Location = new System.Drawing.Point(613, 39);
+            this.cmdDeleteSequence.Location = new System.Drawing.Point(613, 42);
             this.cmdDeleteSequence.Name = "cmdDeleteSequence";
             this.cmdDeleteSequence.Size = new System.Drawing.Size(103, 28);
             this.cmdDeleteSequence.TabIndex = 22;
             this.cmdDeleteSequence.Text = "削除";
             this.cmdDeleteSequence.UseVisualStyleBackColor = true;
+            this.cmdDeleteSequence.Click += new System.EventHandler(this.cmdDeleteSequence_Click);
             // 
             // cmdAddSequence
             // 
-            this.cmdAddSequence.Location = new System.Drawing.Point(504, 39);
+            this.cmdAddSequence.Location = new System.Drawing.Point(504, 42);
             this.cmdAddSequence.Name = "cmdAddSequence";
             this.cmdAddSequence.Size = new System.Drawing.Size(103, 28);
             this.cmdAddSequence.TabIndex = 21;
             this.cmdAddSequence.Text = "追加";
             this.cmdAddSequence.UseVisualStyleBackColor = true;
+            this.cmdAddSequence.Click += new System.EventHandler(this.cmdAddSequence_Click);
+            // 
+            // 編集ToolStripMenuItem
+            // 
+            this.編集ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.入力支援ToolStripMenuItem});
+            this.編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
+            this.編集ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.編集ToolStripMenuItem.Text = "編集";
+            // 
+            // 入力支援ToolStripMenuItem
+            // 
+            this.入力支援ToolStripMenuItem.Name = "入力支援ToolStripMenuItem";
+            this.入力支援ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.入力支援ToolStripMenuItem.Text = "入力支援";
             // 
             // frmMain
             // 
@@ -442,5 +465,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FalseText;
         private System.Windows.Forms.Button cmdDeleteSequence;
         private System.Windows.Forms.Button cmdAddSequence;
+        private System.Windows.Forms.ToolStripMenuItem 編集ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 入力支援ToolStripMenuItem;
     }
 }

@@ -11,7 +11,6 @@ namespace RakuRakuMorakun
     [Serializable] // シリアル化可能
     public class Condition
     {
-
         private string CstName; //識別子
         private string CstTrueValue; //真のときの値
         private string CstFalseValue; //偽のときの値

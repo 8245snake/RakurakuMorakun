@@ -20,3 +20,4 @@ C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\Ra
 C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.csproj.CoreCompileInputs.cache
 C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.exe
 C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.pdb
+C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.frmEditSequence.resources

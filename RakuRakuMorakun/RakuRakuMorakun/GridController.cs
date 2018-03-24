@@ -10,73 +10,34 @@ namespace RakuRakuMorakun
 {
     public class GridController
     {
-        private DataTable CtpDataTable;
-        private Condition[] CtpConditionArr;
-        private readonly Color cEnable = Color.White;
-        private readonly Color cDisenable = Color.Gray;
+        private DataTable CtpDataTable;   //反復子
+        private Condition[] CtpConditionArr;  //条件付き文字列
+        private Sequence[] CtpSequenceArr;  //シーケンス
+        private readonly Color cEnable = Color.White;  //有効セルの色
+        private readonly Color cDisenable = Color.Gray;  //無効セルの色
         private int CnIteratorCount;  //反復子をカウント
         private int CnConditionCount; //条件付き文字列のカウント
+        private int CnSequenceCount; //シーケンスのカウント
 
         public GridController(){
             CtpDataTable = new DataTable();
             CtpConditionArr = new Condition[] { };
+            CtpSequenceArr = new Sequence[] { };
             CnIteratorCount = 0;
             CnConditionCount = 0;
-
-            ////デバッグ用にデータを作る
-            //CtpDataTable.Add(new CoveringIterator("{#1}", new string[] { "AA", "BB", }));
-            //CtpDataTable.Add(new CoveringIterator("{#2}", new string[] { "ああ", "いい", "うう" }, new bool[] { true, false, false }));
-            //CtpDataTable.Add(new CoveringIterator("{#1}", new string[] { "AA", "BB", }));
-            //CtpDataTable.Add(new CoveringIterator("{#2}", new string[] { "ああ", "いい", "うう" }, new bool[] { true, false, false }));
-
+            CnSequenceCount = 0;
         }
 
-        //配列に追加する。すでに同名の条件付き文字列があれば置き換える
-        public void AddCondition(Condition tpCondition)
-        {
-            int nMax = CtpConditionArr.Length;
+        /// //////////////////////////////////////////////////////////////////////////////////////
+        /// プロパティ
+        /// //////////////////////////////////////////////////////////////////////////////////////
 
-            for (int i = 0; i < nMax; i++)
-            {
-                if (CtpConditionArr[i].Name == tpCondition.Name)
-                {
-                    CtpConditionArr[i] = tpCondition;
-                    return;
-                }
-            }
+        public long Total { get { return CtpDataTable.Total; } }
+        public string[] Names { get { return CtpDataTable.GetNames(); } }
 
-            //なければ配列を拡張して追加
-            Array.Resize(ref CtpConditionArr, nMax + 1);
-            CtpConditionArr[nMax] = tpCondition;
-        }
-
-        public void  DeleteCondition(string stName)
-        {
-            bool blFind = false;
-            int nCount = 0;
-
-            for (int i = 0; i < CtpConditionArr.Length; i++)
-            {
-                nCount++;
-
-                //名前は一意
-                if (CtpConditionArr[i].Name == stName)
-                {
-                    blFind = true;
-                    CtpConditionArr[i] = null;
-                    if (CtpConditionArr.Length == 1) { break; }
-                    continue;
-                }
-
-                if (blFind)
-                {
-                    CtpConditionArr[i - 1] = CtpConditionArr[i];
-                }
-            }
-
-            Array.Resize(ref CtpConditionArr, nCount - 1);
-        }
-
+        /// //////////////////////////////////////////////////////////////////////////////////////
+        /// 反復子
+        /// //////////////////////////////////////////////////////////////////////////////////////
 
         //反復子をグリッドから取得
         public void GetDataFromGrid(DataGridView GridView)
@@ -146,8 +107,8 @@ namespace RakuRakuMorakun
         }
 
         //右端に列を追加
-        public void AddColumn(DataGridView GridView, bool blDefaultEnabled = true) {
-
+        public void AddColumn(DataGridView GridView, bool blDefaultEnabled = true)
+        {
             //新しい列の名前
             string stName = GetNextIteratorName();
 
@@ -160,7 +121,7 @@ namespace RakuRakuMorakun
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            if (blDefaultEnabled){return;}
+            if (blDefaultEnabled) { return; }
 
             //デフォルトでグレーアウトして追加したい場合
             for (int nRow = 0; nRow < GridView.RowCount; nRow++)
@@ -168,7 +129,6 @@ namespace RakuRakuMorakun
                 GridView[GridView.ColumnCount - 1, nRow].Style.BackColor = cDisenable;
             }
         }
-
 
         //選択されている列を削除。列タイトルなどはそのままでシフトさせる
         public void DeleteColumn(DataGridView GridView)
@@ -203,7 +163,7 @@ namespace RakuRakuMorakun
             foreach (DataGridViewCell cell in GridView.SelectedCells)
             {
                 cell.Style.BackColor = cDisenable;
-                for (int nRow = cell.RowIndex; nRow < GridView.RowCount ; nRow++)
+                for (int nRow = cell.RowIndex; nRow < GridView.RowCount; nRow++)
                 {
                     GridView[cell.ColumnIndex, nRow].Style.BackColor = cDisenable;
                 }
@@ -216,7 +176,7 @@ namespace RakuRakuMorakun
         {
             for (int nCol = 0; nCol < GridView.Columns.Count; nCol++)
             {
-                for (int nRow = GridView.Rows.Count - 1 ; 0 <= nRow ; nRow--)
+                for (int nRow = GridView.Rows.Count - 1; 0 <= nRow; nRow--)
                 {
                     if (GridView[nCol, nRow].Value == null)
                     {
@@ -280,44 +240,106 @@ namespace RakuRakuMorakun
             }
         }
 
-        //置換結果を配列で返す。件数を指定することができる。
-        public string[] CreateResultArr(DataGridView grdMain, string stTemplate, long lGetCount = 0)
+        //選択している列をnDirectionParamで指定した先と入れ替える
+        public void MoveColumn(DataGridView grdMain, int nDirectionParam)
         {
-            //反復子をグリッドから取得
-            GetDataFromGrid(grdMain);
+            DataGridViewCell cell = GetSelectedCell(grdMain);
+            if (cell == null) { return; }
+            int nSelectedCol = cell.ColumnIndex;
+            int nSelectedRow = cell.RowIndex;
 
-            //インデックスを初期化
-            CtpDataTable.InitIndex();
-            string[] stResult;
-            long lTotal = CtpDataTable.Total;
-            long lCount = 0;
+            if (nSelectedCol + nDirectionParam < 0 || nSelectedCol + nDirectionParam >= grdMain.ColumnCount) { return; }
 
-            //0件ならとりあえず空の配列を返す
-            if (lTotal < 1) { return new string[1]; }
+            object objCellValueBuff;
+            string stCellValueBuff = "";
+            Color color;
 
-            if (lGetCount < 1) //第三引数が0以下なら全件取得
+            //タイトルも入れ替える
+            stCellValueBuff = grdMain.Columns[nSelectedCol + nDirectionParam].HeaderText;
+            grdMain.Columns[nSelectedCol + nDirectionParam].HeaderText = grdMain.Columns[nSelectedCol].HeaderText;
+            grdMain.Columns[nSelectedCol].HeaderText = stCellValueBuff;
+
+            for (int nRow = 0; nRow < grdMain.Rows.Count; nRow++)
             {
-                stResult = new string[lTotal];
-                lGetCount = lTotal;
-            }
-            else 
-            {
-                stResult = new string[lGetCount];
+                //セルの値を入れ替える
+                objCellValueBuff = grdMain[nSelectedCol + nDirectionParam, nRow].Value;
+                stCellValueBuff = (objCellValueBuff != null) ? objCellValueBuff.ToString() : "";
+                grdMain[nSelectedCol + nDirectionParam, nRow].Value = grdMain[nSelectedCol, nRow].Value;
+                grdMain[nSelectedCol, nRow].Value = stCellValueBuff;
+
+                //セルの色を入れ替える
+                color = grdMain[nSelectedCol + nDirectionParam, nRow].Style.BackColor;
+                grdMain[nSelectedCol + nDirectionParam, nRow].Style.BackColor = grdMain[nSelectedCol, nRow].Style.BackColor;
+                grdMain[nSelectedCol, nRow].Style.BackColor = color;
             }
 
-            //1件はかならずある
-            stResult[lCount++] = Converter.ConvertStrData(stTemplate, CtpDataTable, CtpConditionArr);
-            //取得予定件数に達したら終了
-            if (lCount >= lGetCount) { return stResult; }
-            int nRtn = CtpDataTable.NextIndex();
-            while (nRtn == (int)DataTable.INDEX_FLAG.NEXT)
+            //セル選択もずらす
+            grdMain.ClearSelection();
+            grdMain[nSelectedCol + nDirectionParam, nSelectedRow].Selected = true;
+
+        }
+
+        //カウントを1つ上げて名前を返す
+        public string GetNextIteratorName()
+        {
+            CnIteratorCount++;
+            return string.Format(TEXT_FORMAT_ITERATOR, CnIteratorCount.ToString());
+        }
+
+        //反復子の名前を指定して値の配列を返す
+        public string[] GetItemsByName(string stName)
+        {
+            return CtpDataTable.GetItemsByName(stName);
+        }
+
+        /// //////////////////////////////////////////////////////////////////////////////////////
+        /// 条件付き文字列
+        /// //////////////////////////////////////////////////////////////////////////////////////
+
+        //配列に追加する。すでに同名の条件付き文字列があれば置き換える
+        public void AddCondition(Condition tpCondition)
+        {
+            int nMax = CtpConditionArr.Length;
+
+            for (int i = 0; i < nMax; i++)
             {
-                stResult[lCount++] = Converter.ConvertStrData(stTemplate, CtpDataTable, CtpConditionArr);
-                nRtn = CtpDataTable.NextIndex();
-                //取得予定件数に達したら終了
-                if (lCount >= lGetCount) { return stResult; }
+                if (CtpConditionArr[i].Name == tpCondition.Name)
+                {
+                    CtpConditionArr[i] = tpCondition;
+                    return;
+                }
             }
-            return stResult;
+            //なければ配列を拡張して追加
+            Array.Resize(ref CtpConditionArr, nMax + 1);
+            CtpConditionArr[nMax] = tpCondition;
+        }
+
+        //名前を指定して条件付き文字列を削除
+        public void  DeleteCondition(string stName)
+        {
+            bool blFind = false;
+            int nCount = 0;
+
+            for (int i = 0; i < CtpConditionArr.Length; i++)
+            {
+                nCount++;
+
+                //名前は一意
+                if (CtpConditionArr[i].Name == stName)
+                {
+                    blFind = true;
+                    CtpConditionArr[i] = null;
+                    if (CtpConditionArr.Length == 1) { break; }
+                    continue;
+                }
+
+                if (blFind)
+                {
+                    CtpConditionArr[i - 1] = CtpConditionArr[i];
+                }
+            }
+
+            Array.Resize(ref CtpConditionArr, nCount - 1);
         }
 
         //フィールド内の条件付き文字列をグリッドに表示
@@ -335,44 +357,6 @@ namespace RakuRakuMorakun
             }
         }
 
-        public void MoveColumn(DataGridView grdMain, int nDirectionParam)
-        {
-            DataGridViewCell cell = GetSelectedCell(grdMain);
-            if (cell == null) { return; }
-            int nSelectedCol = cell.ColumnIndex;
-            int nSelectedRow = cell.RowIndex;
-
-            if (nSelectedCol + nDirectionParam < 0 || nSelectedCol + nDirectionParam >= grdMain.ColumnCount) { return; }
-
-            object objCellValueBuff;
-            string stCellValueBuff = "";
-            Color color;
-
-            //タイトルも入れ替える
-            stCellValueBuff = grdMain.Columns[nSelectedCol+ nDirectionParam].HeaderText;
-            grdMain.Columns[nSelectedCol + nDirectionParam].HeaderText = grdMain.Columns[nSelectedCol].HeaderText;
-            grdMain.Columns[nSelectedCol].HeaderText = stCellValueBuff;
-
-            for (int nRow = 0; nRow < grdMain.Rows.Count; nRow++)
-            {
-                //セルの値を入れ替える
-                objCellValueBuff = grdMain[nSelectedCol + nDirectionParam, nRow].Value;
-                stCellValueBuff = (objCellValueBuff != null)? objCellValueBuff.ToString() : "";
-                grdMain[nSelectedCol + nDirectionParam, nRow].Value = grdMain[nSelectedCol, nRow].Value;
-                grdMain[nSelectedCol, nRow].Value = stCellValueBuff;
-
-                //セルの色を入れ替える
-                color = grdMain[nSelectedCol + nDirectionParam, nRow].Style.BackColor;
-                grdMain[nSelectedCol + nDirectionParam, nRow].Style.BackColor = grdMain[nSelectedCol, nRow].Style.BackColor;
-                grdMain[nSelectedCol, nRow].Style.BackColor = color;
-            }
-
-            //セル選択もずらす
-            grdMain.ClearSelection();
-            grdMain[nSelectedCol + nDirectionParam, nSelectedRow].Selected = true;
-
-        }
-
         //名前を渡して条件付き文字列を返す。
         //既になければnewする
         public Condition GetCondition(string stName)
@@ -383,7 +367,6 @@ namespace RakuRakuMorakun
             }
 
             return new Condition(stName);
-            
         }
 
         //カウントを1つ上げて名前を返す
@@ -393,17 +376,95 @@ namespace RakuRakuMorakun
             return string.Format(TEXT_FORMAT_CONDITION, CnConditionCount.ToString());
         }
 
-        //カウントを1つ上げて名前を返す
-        public string GetNextIteratorName()
+
+        /// //////////////////////////////////////////////////////////////////////////////////////
+        /// シーケンス
+        /// //////////////////////////////////////////////////////////////////////////////////////
+
+
+        //配列に追加する。すでに同名のシーケンスがあれば置き換える
+        public void AddSequence(Sequence tpSequence)
         {
-            CnIteratorCount++;
-            return string.Format(TEXT_FORMAT_ITERATOR, CnIteratorCount.ToString());
+            int nMax = CtpSequenceArr.Length;
+
+            for (int i = 0; i < nMax; i++)
+            {
+                if (CtpSequenceArr[i].Name == tpSequence.Name)
+                {
+                    CtpSequenceArr[i] = tpSequence;
+                    return;
+                }
+            }
+            //なければ配列を拡張して追加
+            Array.Resize(ref CtpSequenceArr, nMax + 1);
+            CtpSequenceArr[nMax] = tpSequence;
         }
 
-        public string[] GetItemsByName(string stName)
+        //名前を指定してシーケンスを削除
+        public void DeleteSequence(string stName)
         {
-            return CtpDataTable.GetItemsByName(stName);
+            bool blFind = false;
+            int nCount = 0;
+
+            for (int i = 0; i < CtpSequenceArr.Length; i++)
+            {
+                nCount++;
+
+                //名前は一意
+                if (CtpSequenceArr[i].Name == stName)
+                {
+                    blFind = true;
+                    CtpSequenceArr[i] = null;
+                    if (CtpSequenceArr.Length == 1) { break; }
+                    continue;
+                }
+
+                if (blFind)
+                {
+                    CtpSequenceArr[i - 1] = CtpSequenceArr[i];
+                }
+            }
+
+            Array.Resize(ref CtpSequenceArr, nCount - 1);
         }
+
+        //フィールド内のシーケンスをグリッドに表示
+        public void SetSequenceToGrid(DataGridView grdSequence)
+        {
+            grdSequence.Rows.Clear();
+
+            for (int nRow = 0; nRow < CtpSequenceArr.Length; nRow++)
+            {
+                grdSequence.Rows.Add();
+                //ToDo:列挙体にする
+                grdSequence[0, nRow].Value = CtpSequenceArr[nRow].Name;
+                grdSequence[1, nRow].Value = CtpSequenceArr[nRow].Text;
+            }
+        }
+
+        //名前を渡してシーケンスを返す。
+        //既になければnewする
+        public Sequence GetSequence(string stName)
+        {
+            for (int i = 0; i < CtpSequenceArr.Length; i++)
+            {
+                if (CtpSequenceArr[i].Name == stName) { return CtpSequenceArr[i]; }
+            }
+
+            return new Sequence(stName);
+        }
+
+        //カウントを1つ上げて名前を返す
+        public string GetNextSequenceName()
+        {
+            CnSequenceCount++;
+            return string.Format(TEXT_FORMAT_SEQUENCE, CnSequenceCount.ToString());
+        }
+
+
+        /// //////////////////////////////////////////////////////////////////////////////////////
+        /// グリッド操作関係
+        /// //////////////////////////////////////////////////////////////////////////////////////
 
         //選択されているセルの中の最も左上のセルを返す。選択されていなければnullを返す
         public DataGridViewCell GetSelectedCell(DataGridView DataGrid)
@@ -426,8 +487,8 @@ namespace RakuRakuMorakun
             return DataGrid[nColMin, nRowMin];
         }
 
-        //選択しているcell（左上）からペーストする
-        public void PasteGrid(DataGridView grdDataGrid)
+        //選択しているcell（左上）からペーストする。行数をオーバーするとき追加するか指定できる
+        public void PasteGrid(DataGridView grdDataGrid, bool blAddRow = true)
         {
             //クリップボードに文字列データがなければ抜ける
             if (!Clipboard.ContainsText()) { return; }
@@ -439,37 +500,46 @@ namespace RakuRakuMorakun
             int nSelectedRow = GetSelectedCell(grdDataGrid).RowIndex;
             int nNeedAddRows = nSelectedRow + stRowsArr.Length - grdDataGrid.RowCount;
 
-            //足りない分の行を追加
-            for (int i = 0; i < nNeedAddRows; i++)
+            if (blAddRow)
             {
-                grdDataGrid.Rows.Add();
-                
+                //足りない分の行を追加
+                for (int i = 0; i < nNeedAddRows; i++)
+                {
+                    grdDataGrid.Rows.Add();
+                }
             }
 
             for (int i = 0; i < stRowsArr.Length; i++)
             {
-                PasteRow(grdDataGrid, i + nSelectedRow, stRowsArr[i]);
+                PasteRow(grdDataGrid, i + nSelectedRow, stRowsArr[i], blAddRow);
             }
+
         }
 
-        //改行区切りの1列を貼り付ける。行数をオーバーするときは追加する
-        public void PasteRow(DataGridView grdDataGrid, int nRow, string stText)
+        //改行区切りの1列を貼り付ける。列数をオーバーするとき追加するか指定できる
+        public void PasteRow(DataGridView grdDataGrid, int nRow, string stText, bool blAddColumn = true)
         {
 
             string[] stColsArr = stText.Split(new string[] { "\t" }, StringSplitOptions.None);
             int nSelectedColumn = GetSelectedCell(grdDataGrid).ColumnIndex;
             int nNeedAddCols = nSelectedColumn + stColsArr.Length - grdDataGrid.ColumnCount;
 
-            //足りない分の列を追加
-            for (int i = 0; i < nNeedAddCols; i++)
+            if (blAddColumn) //足りない分の列を追加
             {
-                AddColumn(grdDataGrid);
+                for (int i = 0; i < nNeedAddCols; i++)
+                {
+                    AddColumn(grdDataGrid);
+                }
             }
 
             for (int i = 0; i < stColsArr.Length; i++)
             {
+                if (grdDataGrid.Columns.Count - 1 < i + nSelectedColumn) { break; }
+                if (grdDataGrid.Rows.Count - 1 < nRow) { break; }
+
                 grdDataGrid[i + nSelectedColumn, nRow].Value = stColsArr[i];
             }
+
         }
 
         //クリップボードにコピー
@@ -520,11 +590,53 @@ namespace RakuRakuMorakun
             }
 
             Clipboard.SetText(stResult);
-
         }
 
-        public long Total { get { return CtpDataTable.Total; } }
-        public string[] Names { get { return CtpDataTable.GetNames(); } }
+        /// //////////////////////////////////////////////////////////////////////////////////////
+        /// その他の関数
+        /// //////////////////////////////////////////////////////////////////////////////////////
+
+        //置換結果を配列で返す。件数を指定することができる。
+        public string[] CreateResultArr(DataGridView grdMain, string stTemplate, long lGetCount = 0)
+        {
+            //反復子をグリッドから取得
+            GetDataFromGrid(grdMain);
+
+            //インデックスを初期化
+            CtpDataTable.InitIndex();
+            string[] stResult;
+            long lTotal = CtpDataTable.Total;
+            long lCount = 0;
+
+            //0件ならとりあえず空の配列を返す
+            if (lTotal < 1) { return new string[1]; }
+
+            if (lGetCount < 1) //第三引数が0以下なら全件取得
+            {
+                stResult = new string[lTotal];
+                lGetCount = lTotal;
+            }
+            else
+            {
+                stResult = new string[lGetCount];
+            }
+
+            //1件はかならずある
+            stResult[lCount++] = Converter.ConvertStrData(stTemplate, CtpDataTable, CtpConditionArr, CtpSequenceArr);
+            //取得予定件数に達したら終了
+            if (lCount >= lGetCount) { return stResult; }
+            int nRtn = CtpDataTable.NextIndex();
+            while (nRtn == (int)DataTable.INDEX_FLAG.NEXT)
+            {
+                stResult[lCount++] = Converter.ConvertStrData(stTemplate, CtpDataTable, CtpConditionArr, CtpSequenceArr);
+                nRtn = CtpDataTable.NextIndex();
+                //取得予定件数に達したら終了
+                if (lCount >= lGetCount) { return stResult; }
+            }
+            return stResult;
+        }
+
+
 
     }
 

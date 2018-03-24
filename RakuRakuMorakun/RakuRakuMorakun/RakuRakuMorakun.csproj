@@ -56,6 +56,12 @@
     <Compile Include="frmEditCondition.Designer.cs">
       <DependentUpon>frmEditCondition.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEditSequence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditSequence.Designer.cs">
+      <DependentUpon>frmEditSequence.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,8 +77,12 @@
     <Compile Include="GridController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sequence.cs" />
     <EmbeddedResource Include="frmEditCondition.resx">
       <DependentUpon>frmEditCondition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditSequence.resx">
+      <DependentUpon>frmEditSequence.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
