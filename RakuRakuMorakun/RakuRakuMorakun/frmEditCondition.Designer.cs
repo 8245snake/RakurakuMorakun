@@ -36,7 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.optIterator = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.optSequence = new System.Windows.Forms.RadioButton();
+            this.optNumber = new System.Windows.Forms.RadioButton();
             this.lblTrue = new System.Windows.Forms.Label();
             this.lblFalse = new System.Windows.Forms.Label();
             this.txtTrue = new System.Windows.Forms.TextBox();
@@ -120,7 +120,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.optSequence);
+            this.groupBox1.Controls.Add(this.optNumber);
             this.groupBox1.Controls.Add(this.optIterator);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -129,17 +129,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "条件の対象";
             // 
-            // optSequence
+            // optNumber
             // 
-            this.optSequence.AutoSize = true;
-            this.optSequence.Location = new System.Drawing.Point(82, 18);
-            this.optSequence.Name = "optSequence";
-            this.optSequence.Size = new System.Drawing.Size(70, 16);
-            this.optSequence.TabIndex = 7;
-            this.optSequence.TabStop = true;
-            this.optSequence.Text = "シーケンス";
-            this.optSequence.UseVisualStyleBackColor = true;
-            this.optSequence.CheckedChanged += new System.EventHandler(this.optSequence_CheckedChanged);
+            this.optNumber.AutoSize = true;
+            this.optNumber.Location = new System.Drawing.Point(82, 18);
+            this.optNumber.Name = "optNumber";
+            this.optNumber.Size = new System.Drawing.Size(70, 16);
+            this.optNumber.TabIndex = 7;
+            this.optNumber.TabStop = true;
+            this.optNumber.Text = "番号";
+            this.optNumber.UseVisualStyleBackColor = true;
+            this.optNumber.CheckedChanged += new System.EventHandler(this.optSequence_CheckedChanged);
             // 
             // lblTrue
             // 
@@ -283,7 +283,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton optIterator;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton optSequence;
+        private System.Windows.Forms.RadioButton optNumber;
         private System.Windows.Forms.Label lblTrue;
         private System.Windows.Forms.Label lblFalse;
         private System.Windows.Forms.TextBox txtTrue;

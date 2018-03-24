@@ -64,9 +64,9 @@ namespace RakuRakuMorakun
         private void DisplayElement(ConditionElement tpElement)
         {
             //オプションボタンの選択（Typeの方がいい？）
-            if (tpElement.GetCondition() == SEQUENCE_CAPTION) //シーケンス
+            if (tpElement.GetCondition() == NUMBER_CAPTION) //番号
             {
-                optSequence.Checked = true;
+                optNumber.Checked = true;
             }
             else
             {
@@ -109,12 +109,13 @@ namespace RakuRakuMorakun
             if (!optIterator.Checked) { return; }
 
             combCondition.Items.Clear();
-            string[] stNames = CtpController.Names;
-            for (int i = 0; i < stNames.Length; i++)
+            string[] stNamesArr = CtpController.Names;
+            for (int i = 0; i < stNamesArr.Length; i++)
             {
-                combCondition.Items.Add(stNames[i]);
+                combCondition.Items.Add(stNamesArr[i]);
             }
-            combCondition.SelectedIndex = (stNames.Length > 0)? 0 : -1;
+
+            combCondition.SelectedIndex = (combCondition.Items.Count > 0)? 0 : -1;
 
             //combItemは別のイベントで
 
@@ -124,13 +125,13 @@ namespace RakuRakuMorakun
             combOperator.SelectedIndex = 0;
         }
 
-        //シーケンスを選択
+        //番号を選択
         private void optSequence_CheckedChanged(object sender, EventArgs e)
         {
-            if (!optSequence.Checked) { return; }
+            if (!optNumber.Checked) { return; }
 
             combCondition.Items.Clear();
-            combCondition.Items.Add("シーケンス");
+            combCondition.Items.Add("番号");
             combCondition.SelectedIndex = 0;
 
             combItem.Items.Clear();
@@ -138,7 +139,9 @@ namespace RakuRakuMorakun
             {
                 combItem.Items.Add(lCount.ToString());
             }
-            combItem.SelectedIndex = 0;
+
+            //選択状態
+            combItem.SelectedIndex = (combItem.Items.Count > 0) ? 0 : -1;
 
             combOperator.Items.Clear();
             combOperator.Items.Add(EQUAL);
@@ -173,11 +176,11 @@ namespace RakuRakuMorakun
         }
 
 
-        private ConditionOfSequence CreateConditionOfSequence()
+        private ConditionOfNumber CreateConditionOfSequence()
         {
             long lSequence = long.Parse(combItem.Items[combItem.SelectedIndex].ToString());
             string stOperator = combOperator.Items[combOperator.SelectedIndex].ToString();
-            return new ConditionOfSequence(lSequence, stOperator);
+            return new ConditionOfNumber(lSequence, stOperator);
         }
         
         //グリッドに追加ボタン
@@ -188,7 +191,7 @@ namespace RakuRakuMorakun
             {
                 tpElement = CreateConditionOfString();
             }
-            else if (optSequence.Checked)
+            else if (optNumber.Checked)
             {
                 tpElement = CreateConditionOfSequence();
             }

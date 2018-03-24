@@ -26,8 +26,8 @@ namespace RakuRakuMorakun
                 }
             }
 
-            //シーケンスの置換
-            stTemplate = ReplaceSequence(stTemplate, lCount);
+            //番号の置換
+            stTemplate = ReplaceNumber(stTemplate, lCount);
 
             //反復子の置換
             foreach (KeyValuePair<string, string> pair in dicNameValue)
@@ -38,8 +38,8 @@ namespace RakuRakuMorakun
             return stTemplate;
         }
 
-        // シーケンスを0埋めで置換する
-        private static string ReplaceSequence(string stTemplate, long lNumber)
+        // 番号を0埋めで置換する
+        private static string ReplaceNumber(string stTemplate, long lNumber)
         {
             Regex reg = new Regex("{0:0*}");
             MatchCollection matches = reg.Matches(stTemplate);

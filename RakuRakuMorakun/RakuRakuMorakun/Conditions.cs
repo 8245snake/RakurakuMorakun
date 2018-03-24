@@ -211,21 +211,21 @@ namespace RakuRakuMorakun
 
     }
 
-    //シーケンスを対象とする条件
+    //番号を対象とする条件
     [Serializable] // シリアル化可能
-    public class ConditionOfSequence : ConditionElement
+    public class ConditionOfNumber : ConditionElement
     {
 
-        private long ClTargetSequence; //比較するシーケンス値
+        private long ClTargetNumber; //比較する番号
 
-        public ConditionOfSequence(long lTargetSequence, string stOperator) : base(stOperator)
+        public ConditionOfNumber(long lTargetNumber, string stOperator) : base(stOperator)
         {
-            ClTargetSequence = lTargetSequence;
+            ClTargetNumber = lTargetNumber;
         }
 
         public override string GetText()
         {
-            return SEQUENCE_CAPTION + ClTargetSequence.ToString() + CstOperator;
+            return NUMBER_CAPTION + ClTargetNumber.ToString() + CstOperator;
         }
 
         public override bool Judge(DataTable tpData)
@@ -234,25 +234,25 @@ namespace RakuRakuMorakun
 
             if (tpData.Total < 1) { return false; }
 
-            // シーケンス値はインデックスに1足した値
-            long lCurrentSequence = tpData.Index + 1;
+            // 番号はインデックスに1足した値
+            long lCurrentNumber = tpData.Index + 1;
 
             //Switch文に変数が使えないため
             if (CstOperator == EQUAL)
             {
-                return (lCurrentSequence == ClTargetSequence);
+                return (lCurrentNumber == ClTargetNumber);
             }
             else if (CstOperator == NOTEQUAL)
             {
-                return (lCurrentSequence != ClTargetSequence);
+                return (lCurrentNumber != ClTargetNumber);
             }
             else if (CstOperator == UNDER)
             {
-                return (lCurrentSequence < ClTargetSequence);
+                return (lCurrentNumber < ClTargetNumber);
             }
             else if (CstOperator == OVER)
             {
-                return (lCurrentSequence >= ClTargetSequence);
+                return (lCurrentNumber >= ClTargetNumber);
             }
             else
             {
@@ -262,12 +262,12 @@ namespace RakuRakuMorakun
 
         public override string GetCondition()
         {
-            return SEQUENCE_CAPTION;
+            return NUMBER_CAPTION;
         }
 
         public override string GetTarget()
         {
-            return ClTargetSequence.ToString();
+            return ClTargetNumber.ToString();
         }
     }
 

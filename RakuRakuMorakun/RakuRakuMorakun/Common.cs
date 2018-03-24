@@ -8,7 +8,7 @@ namespace RakuRakuMorakun
 {
     public static class Common
     {
-        public static readonly string SEQUENCE_CAPTION = "番号が";
+        public static readonly string NUMBER_CAPTION = "番号が";
         public static readonly string EQUAL = "と等しいとき";
         public static readonly string NOTEQUAL = "と異なるとき";
         public static readonly string UNDER = "より小さいとき";
@@ -21,6 +21,7 @@ namespace RakuRakuMorakun
         public static readonly string TEXT_FORMAT_TOTAL_COUNT = "網羅回数：{0}回";
         public static readonly string TEXT_FORMAT_ITERATOR = "{{#{0}}}";   //｛｝は｛｝でエスケープするらしい
         public static readonly string TEXT_FORMAT_CONDITION = "{{${0}}}";
+        public static readonly string TEXT_FORMAT_FOMULA = "{{={0}}}";
 
 
         /// <summary>バイナリシリアライズを使って任意の型Tのオブジェクトを複製する</summary>
@@ -40,5 +41,15 @@ namespace RakuRakuMorakun
                 return (T)f.Deserialize(stream);
             }
         }
+
+        public static string Eval(string stExpression)
+        {
+            Microsoft.JScript.Vsa.VsaEngine ve = Microsoft.JScript.Vsa.VsaEngine.CreateEngine();
+            var result = Microsoft.JScript.Eval.JScriptEvaluate( stExpression, ve);
+
+            return result.ToString();
+        }
     }
+
+
 }
