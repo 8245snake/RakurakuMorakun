@@ -83,10 +83,10 @@ namespace RakuRakuMorakun
         //開始ボタン
         private void cmdStart_Click(object sender, EventArgs e)
         {
-            //全件取得
-            string[] stResult;
-            stResult = controller.CreateResultArr(grdMain, txtTemplate.Text);
-            frmPreview.PreviewText = string.Join("\r\n", stResult);   
+            chkPreview.Checked = true;
+            //全件取得&クリップボードにコピー
+            UpdatePreview(0,true);
+            MessageBox.Show("クリップボードにコピーしました");
         }
 
         //テンプレートが編集されたらリアルタイムでプレビューする
@@ -158,24 +158,6 @@ namespace RakuRakuMorakun
             controller.SetConditionToGrid(grdCondition);
         }
 
-        
-        private void cmdAllEnabled_Click(object sender, EventArgs e)
-        {
-            controller.ValidNotEmptyCell(grdMain);
-            //更新
-            UpdateGridData();
-            UpdatePreview();
-        }
-
-        //全て有効化
-        private void cmdValidAll_Click(object sender, EventArgs e)
-        {
-            controller.ValidAllCell(grdMain);
-            //更新
-            UpdateGridData();
-            UpdatePreview();
-        }
-
         //セルがクリックされたら内容を表示
         private void grdMain_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -198,12 +180,13 @@ namespace RakuRakuMorakun
         //セルが編集モードになったとき最初に呼ばれる
         private void grdMain_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+            
         }
 
         //CellBeginEditの次に呼ばれる
         private void grdMain_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-
+            
             //表示されているコントロールがDataGridViewTextBoxEditingControlか調べる
             if (e.Control is DataGridViewTextBoxEditingControl)
             {
@@ -258,13 +241,16 @@ namespace RakuRakuMorakun
         }
 
         //プレビュー更新
-        private void UpdatePreview(int nGetCount = 5)
+        private void UpdatePreview(int nGetCount = 5, bool blClipboardCopyFlag = false)
         {
             if (!frmPreview.Visible) { return; }
 
-            string[] stResult;
-            stResult = controller.CreateResultArr(grdMain, txtTemplate.Text, nGetCount);
-            frmPreview.PreviewText = string.Join("\r\n", stResult);
+            string[] stResultArr;
+            stResultArr = controller.CreateResultArr(grdMain, txtTemplate.Text, nGetCount);
+            string stResult = string.Join("\r\n", stResultArr);
+            frmPreview.PreviewText = stResult;
+
+            if (blClipboardCopyFlag) { Clipboard.SetText(stResult); }
         }
 
 
@@ -301,6 +287,12 @@ namespace RakuRakuMorakun
         {
             controller.MoveColumn(grdMain, 1);
             UpdateGridData();
+        }
+
+        //行が追加されたとき
+        private void grdMain_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            //controller.InvalidNewRow(grdMain);
         }
     }
 }

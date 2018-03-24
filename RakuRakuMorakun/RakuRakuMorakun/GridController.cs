@@ -265,6 +265,21 @@ namespace RakuRakuMorakun
             }
         }
 
+        //新規行をグレーアウトする
+        public void InvalidNewRow(DataGridView grdMain)
+        {
+            for (int nRow = 0; nRow < grdMain.Rows.Count; nRow++)
+            {
+                if (grdMain.Rows[nRow].IsNewRow)
+                {
+                    for (int nCol = 0; nCol < grdMain.Columns.Count; nCol++)
+                    {
+                        grdMain[nCol, nRow].Style.BackColor = cDisenable;
+                    }
+                }
+            }
+        }
+
         //置換結果を配列で返す。件数を指定することができる。
         public string[] CreateResultArr(DataGridView grdMain, string stTemplate, long lGetCount = 0)
         {
