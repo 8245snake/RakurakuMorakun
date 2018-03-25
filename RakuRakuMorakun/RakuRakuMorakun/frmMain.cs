@@ -197,14 +197,23 @@ namespace RakuRakuMorakun
                 {
                     cell.Value = null;
                 }
+                //更新
+                UpdateGridData();
+                UpdatePreview();
             }
             else if (e.KeyCode == Keys.V && e.Control) //Ctr + V（ペースト）
             {
                 controller.PasteGrid(grdMain);
+                //更新
+                UpdateGridData();
+                UpdatePreview();
             }
             else if (e.KeyCode == Keys.C && e.Control) //Ctr + C（コピー）
             {
                 controller.CopyGrid(grdMain);
+                //更新
+                UpdateGridData();
+                UpdatePreview();
             }
         }
 
@@ -391,6 +400,40 @@ namespace RakuRakuMorakun
             }
         }
 
+
+        /// //////////////////////////////////////////////////////////////////////////////////////
+        /// 外部連携関係のイベント
+        /// //////////////////////////////////////////////////////////////////////////////////////
+
+        private void txtExternal_TextChanged(object sender, EventArgs e)
+        {
+            if (txtExternal.Text == "") { return; }
+
+            dialogDatarRcieved frmF = new dialogDatarRcieved();
+            frmF.RecievedText = txtExternal.Text;
+            frmF.ShowDialog();
+
+            int nMode = frmF.CommandMode;
+            string stExternal = txtExternal.Text;
+
+            frmF.Dispose();
+            txtExternal.Text = "";
+
+            //反映処理
+            if (nMode == (int)EXTERNAL_FLAG.TEMPLATE)
+            {
+                txtTemplate.Text = stExternal;
+            }
+            else if (nMode == (int)EXTERNAL_FLAG.ITERATOR)
+            {
+
+            }
+            else //キャンセル  なにもしない
+            {
+            }
+
+        }
+
         /// //////////////////////////////////////////////////////////////////////////////////////
         /// その他関数
         /// //////////////////////////////////////////////////////////////////////////////////////
@@ -436,6 +479,9 @@ namespace RakuRakuMorakun
             UpdateGridData();
         }
 
-
+        private void cmdExternal_Click(object sender, EventArgs e)
+        {
+            txtExternal_TextChanged(sender,e);
+        }
     }
 }

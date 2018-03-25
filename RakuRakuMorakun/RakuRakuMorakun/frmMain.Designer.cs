@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grdMain = new System.Windows.Forms.DataGridView();
             this.cmdAllGrayOut = new System.Windows.Forms.Button();
@@ -53,7 +52,6 @@
             this.grdSequence = new System.Windows.Forms.DataGridView();
             this.SeqName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SeqValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Save = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,10 +60,16 @@
             this.InputAssist = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdDeleteSequence = new System.Windows.Forms.Button();
             this.cmdAddSequence = new System.Windows.Forms.Button();
+            this.groupSequence = new System.Windows.Forms.GroupBox();
+            this.groupCondition = new System.Windows.Forms.GroupBox();
+            this.txtExternal = new System.Windows.Forms.TextBox();
+            this.cmdExternal = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdCondition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSequence)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.groupSequence.SuspendLayout();
+            this.groupCondition.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdMain
@@ -155,7 +159,7 @@
             this.txtTemplate.Location = new System.Drawing.Point(12, 401);
             this.txtTemplate.Multiline = true;
             this.txtTemplate.Name = "txtTemplate";
-            this.txtTemplate.Size = new System.Drawing.Size(974, 232);
+            this.txtTemplate.Size = new System.Drawing.Size(980, 232);
             this.txtTemplate.TabIndex = 7;
             this.txtTemplate.TextChanged += new System.EventHandler(this.txtTemplate_TextChanged);
             // 
@@ -171,7 +175,7 @@
             this.Condition,
             this.TrueText,
             this.FalseText});
-            this.grdCondition.Location = new System.Drawing.Point(507, 250);
+            this.grdCondition.Location = new System.Drawing.Point(9, 52);
             this.grdCondition.MultiSelect = false;
             this.grdCondition.Name = "grdCondition";
             this.grdCondition.ReadOnly = true;
@@ -179,7 +183,7 @@
             this.grdCondition.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.grdCondition.RowTemplate.Height = 21;
             this.grdCondition.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdCondition.Size = new System.Drawing.Size(492, 145);
+            this.grdCondition.Size = new System.Drawing.Size(492, 130);
             this.grdCondition.TabIndex = 8;
             this.grdCondition.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCondition_CellDoubleClick);
             // 
@@ -212,7 +216,7 @@
             // 
             // cmdStart
             // 
-            this.cmdStart.Location = new System.Drawing.Point(822, 648);
+            this.cmdStart.Location = new System.Drawing.Point(828, 648);
             this.cmdStart.Name = "cmdStart";
             this.cmdStart.Size = new System.Drawing.Size(164, 27);
             this.cmdStart.TabIndex = 9;
@@ -232,7 +236,7 @@
             // 
             // cmdAddCondition
             // 
-            this.cmdAddCondition.Location = new System.Drawing.Point(507, 216);
+            this.cmdAddCondition.Location = new System.Drawing.Point(9, 18);
             this.cmdAddCondition.Name = "cmdAddCondition";
             this.cmdAddCondition.Size = new System.Drawing.Size(103, 28);
             this.cmdAddCondition.TabIndex = 11;
@@ -242,7 +246,7 @@
             // 
             // cmdDeleteCondition
             // 
-            this.cmdDeleteCondition.Location = new System.Drawing.Point(616, 216);
+            this.cmdDeleteCondition.Location = new System.Drawing.Point(118, 18);
             this.cmdDeleteCondition.Name = "cmdDeleteCondition";
             this.cmdDeleteCondition.Size = new System.Drawing.Size(103, 28);
             this.cmdDeleteCondition.TabIndex = 12;
@@ -298,13 +302,13 @@
             this.grdSequence.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SeqName,
             this.SeqValue});
-            this.grdSequence.Location = new System.Drawing.Point(504, 74);
+            this.grdSequence.Location = new System.Drawing.Point(9, 52);
             this.grdSequence.MultiSelect = false;
             this.grdSequence.Name = "grdSequence";
             this.grdSequence.RowHeadersVisible = false;
             this.grdSequence.RowTemplate.Height = 21;
             this.grdSequence.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdSequence.Size = new System.Drawing.Size(495, 115);
+            this.grdSequence.Size = new System.Drawing.Size(488, 95);
             this.grdSequence.TabIndex = 18;
             this.grdSequence.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdSequence_CellDoubleClick);
             // 
@@ -321,11 +325,6 @@
             this.SeqValue.Name = "SeqValue";
             this.SeqValue.ReadOnly = true;
             this.SeqValue.Width = 400;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // menuStrip1
             // 
@@ -350,14 +349,14 @@
             // Save
             // 
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(180, 22);
+            this.Save.Size = new System.Drawing.Size(98, 22);
             this.Save.Text = "保存";
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Open
             // 
             this.Open.Name = "Open";
-            this.Open.Size = new System.Drawing.Size(180, 22);
+            this.Open.Size = new System.Drawing.Size(98, 22);
             this.Open.Text = "開く";
             this.Open.Click += new System.EventHandler(this.Open_Click);
             // 
@@ -372,13 +371,13 @@
             // InputAssist
             // 
             this.InputAssist.Name = "InputAssist";
-            this.InputAssist.Size = new System.Drawing.Size(180, 22);
+            this.InputAssist.Size = new System.Drawing.Size(122, 22);
             this.InputAssist.Text = "入力支援";
             this.InputAssist.Click += new System.EventHandler(this.InputAssist_Click);
             // 
             // cmdDeleteSequence
             // 
-            this.cmdDeleteSequence.Location = new System.Drawing.Point(613, 42);
+            this.cmdDeleteSequence.Location = new System.Drawing.Point(118, 18);
             this.cmdDeleteSequence.Name = "cmdDeleteSequence";
             this.cmdDeleteSequence.Size = new System.Drawing.Size(103, 28);
             this.cmdDeleteSequence.TabIndex = 22;
@@ -388,7 +387,7 @@
             // 
             // cmdAddSequence
             // 
-            this.cmdAddSequence.Location = new System.Drawing.Point(504, 42);
+            this.cmdAddSequence.Location = new System.Drawing.Point(9, 18);
             this.cmdAddSequence.Name = "cmdAddSequence";
             this.cmdAddSequence.Size = new System.Drawing.Size(103, 28);
             this.cmdAddSequence.TabIndex = 21;
@@ -396,24 +395,65 @@
             this.cmdAddSequence.UseVisualStyleBackColor = true;
             this.cmdAddSequence.Click += new System.EventHandler(this.cmdAddSequence_Click);
             // 
+            // groupSequence
+            // 
+            this.groupSequence.Controls.Add(this.cmdDeleteSequence);
+            this.groupSequence.Controls.Add(this.cmdAddSequence);
+            this.groupSequence.Controls.Add(this.grdSequence);
+            this.groupSequence.Location = new System.Drawing.Point(491, 27);
+            this.groupSequence.Name = "groupSequence";
+            this.groupSequence.Size = new System.Drawing.Size(510, 153);
+            this.groupSequence.TabIndex = 23;
+            this.groupSequence.TabStop = false;
+            this.groupSequence.Text = "シーケンス";
+            // 
+            // groupCondition
+            // 
+            this.groupCondition.Controls.Add(this.cmdDeleteCondition);
+            this.groupCondition.Controls.Add(this.cmdAddCondition);
+            this.groupCondition.Controls.Add(this.grdCondition);
+            this.groupCondition.Location = new System.Drawing.Point(491, 186);
+            this.groupCondition.Name = "groupCondition";
+            this.groupCondition.Size = new System.Drawing.Size(510, 197);
+            this.groupCondition.TabIndex = 24;
+            this.groupCondition.TabStop = false;
+            this.groupCondition.Text = "条件付き文字列";
+            // 
+            // txtExternal
+            // 
+            this.txtExternal.AcceptsReturn = true;
+            this.txtExternal.AcceptsTab = true;
+            this.txtExternal.Location = new System.Drawing.Point(-3000, -3000);
+            this.txtExternal.Multiline = true;
+            this.txtExternal.Name = "txtExternal";
+            this.txtExternal.Size = new System.Drawing.Size(235, 36);
+            this.txtExternal.TabIndex = 25;
+            this.txtExternal.TextChanged += new System.EventHandler(this.txtExternal_TextChanged);
+            // 
+            // cmdExternal
+            // 
+            this.cmdExternal.Location = new System.Drawing.Point(-3000, -3000);
+            this.cmdExternal.Name = "cmdExternal";
+            this.cmdExternal.Size = new System.Drawing.Size(75, 23);
+            this.cmdExternal.TabIndex = 26;
+            this.cmdExternal.Text = "button1";
+            this.cmdExternal.UseVisualStyleBackColor = true;
+            this.cmdExternal.Click += new System.EventHandler(this.cmdExternal_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 682);
-            this.Controls.Add(this.cmdDeleteSequence);
-            this.Controls.Add(this.cmdAddSequence);
+            this.Controls.Add(this.groupCondition);
+            this.Controls.Add(this.groupSequence);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.grdSequence);
             this.Controls.Add(this.cmdMoveRight);
             this.Controls.Add(this.cmdMoveLeft);
             this.Controls.Add(this.txtCellText);
             this.Controls.Add(this.chkPreview);
-            this.Controls.Add(this.cmdDeleteCondition);
-            this.Controls.Add(this.cmdAddCondition);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.cmdStart);
-            this.Controls.Add(this.grdCondition);
             this.Controls.Add(this.txtTemplate);
             this.Controls.Add(this.cmdDeleteColumn);
             this.Controls.Add(this.cmdAddColumn);
@@ -421,6 +461,8 @@
             this.Controls.Add(this.cmdInvalid);
             this.Controls.Add(this.cmdAllGrayOut);
             this.Controls.Add(this.grdMain);
+            this.Controls.Add(this.txtExternal);
+            this.Controls.Add(this.cmdExternal);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
@@ -431,6 +473,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdSequence)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupSequence.ResumeLayout(false);
+            this.groupCondition.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -455,7 +499,6 @@
         private System.Windows.Forms.Button cmdMoveLeft;
         private System.Windows.Forms.Button cmdMoveRight;
         private System.Windows.Forms.DataGridView grdSequence;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Save;
@@ -470,5 +513,9 @@
         private System.Windows.Forms.ToolStripMenuItem InputAssist;
         private System.Windows.Forms.DataGridViewTextBoxColumn SeqName;
         private System.Windows.Forms.DataGridViewTextBoxColumn SeqValue;
+        private System.Windows.Forms.GroupBox groupSequence;
+        private System.Windows.Forms.GroupBox groupCondition;
+        private System.Windows.Forms.TextBox txtExternal;
+        private System.Windows.Forms.Button cmdExternal;
     }
 }

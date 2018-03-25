@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using static RakuRakuMorakun.Common;
 
 namespace RakuRakuMorakun
 {
     [Serializable]
     public class DataTable
     {
-        public enum INDEX_FLAG : int { NEXT, END };
         private CoveringIterator[] CtpTable;
         private int[] CnIndexArray;
         private long lNowIndex;

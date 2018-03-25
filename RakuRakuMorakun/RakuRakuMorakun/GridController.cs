@@ -631,7 +631,7 @@ namespace RakuRakuMorakun
             //取得予定件数に達したら終了
             if (lCount >= lGetCount) { return stResult; }
             int nRtn = CtpDataTable.NextIndex();
-            while (nRtn == (int)DataTable.INDEX_FLAG.NEXT)
+            while (nRtn == (int)INDEX_FLAG.NEXT)
             {
                 stResult[lCount++] = Converter.ConvertStrData(stTemplate, CtpDataTable, CtpConditionArr, CtpSequenceArr);
                 nRtn = CtpDataTable.NextIndex();

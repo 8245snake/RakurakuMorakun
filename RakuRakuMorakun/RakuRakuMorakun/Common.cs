@@ -26,6 +26,9 @@ namespace RakuRakuMorakun
         public static readonly string TEXT_FORMAT_FOMULA = "{{={0}}}";
         public static readonly string TEXT_FORMAT_SEQUENCE = "{{${0}}}";
 
+        public enum INDEX_FLAG : int { NEXT, END };
+        public enum EXTERNAL_FLAG : int { TEMPLATE, ITERATOR, CANCEL };
+
         private static readonly Microsoft.JScript.Vsa.VsaEngine VsaEngine = Microsoft.JScript.Vsa.VsaEngine.CreateEngine();
 
 

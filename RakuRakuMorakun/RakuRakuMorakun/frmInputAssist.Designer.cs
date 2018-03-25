@@ -35,16 +35,17 @@
             // 
             // txtWork
             // 
+            this.txtWork.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txtWork.Location = new System.Drawing.Point(2, 36);
             this.txtWork.Multiline = true;
             this.txtWork.Name = "txtWork";
             this.txtWork.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtWork.Size = new System.Drawing.Size(423, 291);
+            this.txtWork.Size = new System.Drawing.Size(657, 291);
             this.txtWork.TabIndex = 0;
             // 
             // cmdConvert
             // 
-            this.cmdConvert.Location = new System.Drawing.Point(302, 2);
+            this.cmdConvert.Location = new System.Drawing.Point(228, 2);
             this.cmdConvert.Name = "cmdConvert";
             this.cmdConvert.Size = new System.Drawing.Size(115, 28);
             this.cmdConvert.TabIndex = 1;
@@ -58,17 +59,18 @@
             this.combConvertType.FormattingEnabled = true;
             this.combConvertType.Location = new System.Drawing.Point(8, 7);
             this.combConvertType.Name = "combConvertType";
-            this.combConvertType.Size = new System.Drawing.Size(284, 20);
+            this.combConvertType.Size = new System.Drawing.Size(214, 20);
             this.combConvertType.TabIndex = 2;
             // 
             // frmInputAssist
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 330);
+            this.ClientSize = new System.Drawing.Size(661, 330);
             this.Controls.Add(this.combConvertType);
             this.Controls.Add(this.cmdConvert);
             this.Controls.Add(this.txtWork);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmInputAssist";
             this.Text = "入力支援";
             this.Load += new System.EventHandler(this.frmInputAssist_Load);

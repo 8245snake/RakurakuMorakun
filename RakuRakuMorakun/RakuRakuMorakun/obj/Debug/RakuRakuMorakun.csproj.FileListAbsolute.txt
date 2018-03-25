@@ -22,3 +22,5 @@ C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\Ra
 C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.pdb
 C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.frmEditSequence.resources
 C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.frmInputAssist.resources
+C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\RakuRakuMorakun\obj\Debug\RakuRakuMorakun.dialogDatarRcieved.resources
+C:\Users\Shingo\source\repos\RakurakuMourakun\RakurakuMorakun\RakuRakuMorakun\RakuRakuMorakun\bin\Debug\RakuRakuMorakun.exe.config
