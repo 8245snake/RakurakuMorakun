@@ -22,28 +22,25 @@ namespace RakuRakuMorakun
 
         public static readonly string TEXT_FORMAT_TOTAL_COUNT = "網羅回数：{0}回";
         public static readonly string TEXT_FORMAT_ITERATOR = "{{#{0}}}";   //｛｝は｛｝でエスケープするらしい
-        public static readonly string TEXT_FORMAT_CONDITION = "{{${0}}}";
+        public static readonly string TEXT_FORMAT_CONDITION = "{{?{0}}}";
         public static readonly string TEXT_FORMAT_FOMULA = "{{={0}}}";
-        public static readonly string TEXT_FORMAT_SEQUENCE = "{{%{0}}}";
+        public static readonly string TEXT_FORMAT_SEQUENCE = "{{${0}}}";
 
         private static readonly Microsoft.JScript.Vsa.VsaEngine VsaEngine = Microsoft.JScript.Vsa.VsaEngine.CreateEngine();
 
 
-        /// <summary>バイナリシリアライズを使って任意の型Tのオブジェクトを複製する</summary>
-        /// <returns><paramref name="source"/>を複製したオブジェクト</returns>
-        /// <exception cref="SerializationException"><paramref name="source"/>がシリアル化可能としてマークされていない</exception>
-        public static T CloneObject<T>(T source)
+        //バイナリシリアライズを使って任意の型Tのオブジェクトを複製する
+        public static T CloneObject<T>(T objData)
         {
-            // バイナリシリアライズによってsourceの複製を作成する
             using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
             {
-                BinaryFormatter f = new BinaryFormatter();
+                BinaryFormatter binaryformatter = new BinaryFormatter();
 
-                f.Serialize(stream, source);
+                binaryformatter.Serialize(stream, objData);
 
                 stream.Position = 0L;
 
-                return (T)f.Deserialize(stream);
+                return (T)binaryformatter.Deserialize(stream);
             }
         }
 
@@ -65,9 +62,10 @@ namespace RakuRakuMorakun
 
         }
 
-
-        public static void SaveSerializeData(string stPath ,object objData)
-        {
+        //オブジェクトをシリアライズしてXMLに保存
+        public static void SaveSerializeData<T>(string stPath, T objData)
+            where T : class
+            {
             SoapFormatter formatter = new SoapFormatter();
             using (Stream stream = new FileStream(stPath, FileMode.Create))
             {
@@ -75,6 +73,7 @@ namespace RakuRakuMorakun
             }
         }
 
+        //XMLをデシリアライズしてオブジェクトを復元
         public static T DeserializeData<T>(string stPath)
             where T : class
         {
@@ -83,8 +82,8 @@ namespace RakuRakuMorakun
             using (Stream stream = new FileStream(stPath, FileMode.Open))
             {
                 objRtn = (T)formatter.Deserialize(stream);
+                return objRtn;
             }
-            return objRtn;
         }
     }
 

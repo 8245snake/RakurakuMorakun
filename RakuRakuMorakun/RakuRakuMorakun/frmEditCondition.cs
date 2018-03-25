@@ -199,7 +199,12 @@ namespace RakuRakuMorakun
             {
                 return;
             }
-            //重複チェックいれたい
+
+            //重複チェック
+            for (int nRow = 0; nRow < grdConditionElement.Rows.Count; nRow++)
+            {
+                if (grdConditionElement[0, nRow].Value.ToString() == tpElement.GetText()) { return; }
+            }
 
             grdConditionElement.Rows.Add(tpElement.GetText());
             CtpCondition_Buff.AddElement(tpElement);

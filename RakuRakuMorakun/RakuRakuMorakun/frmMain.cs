@@ -364,6 +364,7 @@ namespace RakuRakuMorakun
         private void Save_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.CheckFileExists = false;
             ofd.FileName = "rakuraku.xml";
             ofd.Filter = "XMLファイル(*.xml)|*.xml";
             ofd.Title = "ファイルの保存先を設定してください";
