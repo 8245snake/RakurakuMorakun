@@ -195,8 +195,8 @@ namespace RakuRakuMorakun
             return stNames;
         }
 
-        //名前から要素の配列を返す。無効なものも返す。
-        public string[] GetItemsByName(string stName) {
+        //名前から要素の配列を返す。無効なものも返す。ついでにインデックスも返す。
+        public string[] GetItemsByName(string stName, out int nIndex) {
             int nCol = 0;
 
             for (int i = 0; i < CtpTable.Length; i++)
@@ -207,6 +207,7 @@ namespace RakuRakuMorakun
                     break;
                 }
             }
+            nIndex = nCol;
             return CtpTable[nCol].GetItemArr();
         }
 

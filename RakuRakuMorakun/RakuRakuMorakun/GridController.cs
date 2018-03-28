@@ -292,9 +292,27 @@ namespace RakuRakuMorakun
         }
 
         //反復子の名前を指定して値の配列を返す
-        public string[] GetItemsByName(string stName)
+        public string[] GetItemsByName(string stName, bool blOnlyValidItem = true)
         {
-            return CtpDataTable.GetItemsByName(stName);
+            int nCol;
+            string[] stItemsArr = CtpDataTable.GetItemsByName(stName, out nCol);
+            int nCount = 0;
+
+            if (blOnlyValidItem)
+            {
+                for (int i = 0; i < stItemsArr.Length; i++)
+                {
+                    if (CtpDataTable.Enabled(i, nCol))
+                    {
+                        stItemsArr[i] = CtpDataTable.Item(i,nCol);
+                        nCount++;
+                    }
+                }
+                Array.Resize(ref stItemsArr, nCount);
+            }
+
+            return stItemsArr;
+            
         }
 
         /// //////////////////////////////////////////////////////////////////////////////////////
