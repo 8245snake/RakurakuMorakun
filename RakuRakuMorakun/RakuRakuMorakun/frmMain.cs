@@ -221,6 +221,10 @@ namespace RakuRakuMorakun
         private void grdMain_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             UpdateGridData();
+            for (int i = 0; i < grdMain.RowCount; i++)
+            {
+                grdMain.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
         }
 
         /// /////////////////////////////////////////////////////////////////////////////////////
@@ -413,6 +417,24 @@ namespace RakuRakuMorakun
             frmSetting frmG = new frmSetting();
             frmG.ShowDialog();
             frmG.Dispose();
+        }
+
+        //行を追加
+        private void AddRows_Click(object sender, EventArgs e)
+        {
+            dialogNumericInputBox frmI = new dialogNumericInputBox("追加する行数を記入してください","行数入力");
+            frmI.ShowDialog();
+            int nRtn = frmI.Result;
+            int nInput = frmI.InputValue;
+            frmI.Dispose();
+
+            if (nRtn == (int)DialogResult.OK)
+            {
+                for (int i = 0; i < nInput; i++)
+                {
+                    grdMain.Rows.Add();
+                }
+            }
         }
 
         /// //////////////////////////////////////////////////////////////////////////////////////

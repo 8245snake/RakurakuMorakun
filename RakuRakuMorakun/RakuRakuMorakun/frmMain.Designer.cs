@@ -55,20 +55,21 @@
             this.menueFile = new System.Windows.Forms.ToolStripMenuItem();
             this.Save = new System.Windows.Forms.ToolStripMenuItem();
             this.Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.Setting = new System.Windows.Forms.ToolStripMenuItem();
             this.menueEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.InputAssist = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdDeleteSequence = new System.Windows.Forms.Button();
             this.cmdAddSequence = new System.Windows.Forms.Button();
             this.groupSequence = new System.Windows.Forms.GroupBox();
             this.groupCondition = new System.Windows.Forms.GroupBox();
+            this.cmdConditionsSummary = new System.Windows.Forms.Button();
             this.txtExternal = new System.Windows.Forms.TextBox();
             this.cmdExternal = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.grdMain = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.Setting = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmdConditionsSummary = new System.Windows.Forms.Button();
+            this.AddRows = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdCondition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSequence)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -334,21 +335,29 @@
             // Save
             // 
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(180, 22);
+            this.Save.Size = new System.Drawing.Size(98, 22);
             this.Save.Text = "保存";
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Open
             // 
             this.Open.Name = "Open";
-            this.Open.Size = new System.Drawing.Size(180, 22);
+            this.Open.Size = new System.Drawing.Size(98, 22);
             this.Open.Text = "開く";
             this.Open.Click += new System.EventHandler(this.Open_Click);
+            // 
+            // Setting
+            // 
+            this.Setting.Name = "Setting";
+            this.Setting.Size = new System.Drawing.Size(98, 22);
+            this.Setting.Text = "設定";
+            this.Setting.Click += new System.EventHandler(this.Setting_Click);
             // 
             // menueEdit
             // 
             this.menueEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.InputAssist});
+            this.InputAssist,
+            this.AddRows});
             this.menueEdit.Name = "menueEdit";
             this.menueEdit.Size = new System.Drawing.Size(43, 20);
             this.menueEdit.Text = "編集";
@@ -406,6 +415,16 @@
             this.groupCondition.TabIndex = 24;
             this.groupCondition.TabStop = false;
             this.groupCondition.Text = "条件付き文字列";
+            // 
+            // cmdConditionsSummary
+            // 
+            this.cmdConditionsSummary.Location = new System.Drawing.Point(227, 18);
+            this.cmdConditionsSummary.Name = "cmdConditionsSummary";
+            this.cmdConditionsSummary.Size = new System.Drawing.Size(103, 28);
+            this.cmdConditionsSummary.TabIndex = 13;
+            this.cmdConditionsSummary.Text = "サマリー表示";
+            this.cmdConditionsSummary.UseVisualStyleBackColor = true;
+            this.cmdConditionsSummary.Click += new System.EventHandler(this.cmdConditionsSummary_Click);
             // 
             // txtExternal
             // 
@@ -470,11 +489,12 @@
             this.grdMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdMain.Location = new System.Drawing.Point(3, 71);
             this.grdMain.Name = "grdMain";
-            this.grdMain.RowHeadersVisible = false;
+            this.grdMain.RowHeadersWidth = 60;
             this.grdMain.RowTemplate.Height = 21;
             this.grdMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grdMain.Size = new System.Drawing.Size(490, 275);
             this.grdMain.TabIndex = 28;
+            this.grdMain.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.grdMain_RowsAdded);
             // 
             // flowLayoutPanel3
             // 
@@ -485,22 +505,12 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(523, 377);
             this.flowLayoutPanel3.TabIndex = 30;
             // 
-            // Setting
+            // AddRows
             // 
-            this.Setting.Name = "Setting";
-            this.Setting.Size = new System.Drawing.Size(180, 22);
-            this.Setting.Text = "設定";
-            this.Setting.Click += new System.EventHandler(this.Setting_Click);
-            // 
-            // cmdConditionsSummary
-            // 
-            this.cmdConditionsSummary.Location = new System.Drawing.Point(227, 18);
-            this.cmdConditionsSummary.Name = "cmdConditionsSummary";
-            this.cmdConditionsSummary.Size = new System.Drawing.Size(103, 28);
-            this.cmdConditionsSummary.TabIndex = 13;
-            this.cmdConditionsSummary.Text = "サマリー表示";
-            this.cmdConditionsSummary.UseVisualStyleBackColor = true;
-            this.cmdConditionsSummary.Click += new System.EventHandler(this.cmdConditionsSummary_Click);
+            this.AddRows.Name = "AddRows";
+            this.AddRows.Size = new System.Drawing.Size(180, 22);
+            this.AddRows.Text = "行を追加";
+            this.AddRows.Click += new System.EventHandler(this.AddRows_Click);
             // 
             // frmMain
             // 
@@ -577,5 +587,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.ToolStripMenuItem Setting;
         private System.Windows.Forms.Button cmdConditionsSummary;
+        private System.Windows.Forms.ToolStripMenuItem AddRows;
     }
 }
