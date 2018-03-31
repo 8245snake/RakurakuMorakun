@@ -47,8 +47,10 @@
             this.cmdPush = new System.Windows.Forms.Button();
             this.cmdPull = new System.Windows.Forms.Button();
             this.vmdCancel = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdConditionElement)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmdSet
@@ -122,7 +124,7 @@
             // 
             this.groupBox1.Controls.Add(this.optNumber);
             this.groupBox1.Controls.Add(this.optIterator);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(165, 46);
             this.groupBox1.TabIndex = 7;
@@ -134,7 +136,7 @@
             this.optNumber.AutoSize = true;
             this.optNumber.Location = new System.Drawing.Point(82, 18);
             this.optNumber.Name = "optNumber";
-            this.optNumber.Size = new System.Drawing.Size(70, 16);
+            this.optNumber.Size = new System.Drawing.Size(47, 16);
             this.optNumber.TabIndex = 7;
             this.optNumber.TabStop = true;
             this.optNumber.Text = "番号";
@@ -177,9 +179,11 @@
             // 
             // combAndOr
             // 
+            this.combAndOr.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.combAndOr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combAndOr.FormattingEnabled = true;
-            this.combAndOr.Location = new System.Drawing.Point(295, 29);
+            this.combAndOr.Location = new System.Drawing.Point(271, 16);
+            this.combAndOr.Margin = new System.Windows.Forms.Padding(100, 3, 3, 3);
             this.combAndOr.Name = "combAndOr";
             this.combAndOr.Size = new System.Drawing.Size(137, 20);
             this.combAndOr.TabIndex = 13;
@@ -241,33 +245,43 @@
             this.vmdCancel.UseVisualStyleBackColor = true;
             this.vmdCancel.Click += new System.EventHandler(this.vmdCancel_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
+            this.flowLayoutPanel1.Controls.Add(this.combAndOr);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 12);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(426, 56);
+            this.flowLayoutPanel1.TabIndex = 18;
+            // 
             // frmEditCondition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 468);
+            this.ClientSize = new System.Drawing.Size(453, 475);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.vmdCancel);
             this.Controls.Add(this.cmdPull);
             this.Controls.Add(this.cmdPush);
             this.Controls.Add(this.grdConditionElement);
-            this.Controls.Add(this.combAndOr);
             this.Controls.Add(this.txtFalse);
             this.Controls.Add(this.txtTrue);
             this.Controls.Add(this.lblFalse);
             this.Controls.Add(this.lblTrue);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.combOperator);
             this.Controls.Add(this.combItem);
             this.Controls.Add(this.lblGa);
             this.Controls.Add(this.combCondition);
             this.Controls.Add(this.cmdSet);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmEditCondition";
             this.Text = "条件付き文字列";
             this.Load += new System.EventHandler(this.frmEditCondition_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdConditionElement)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,6 +308,7 @@
         private System.Windows.Forms.Button cmdPull;
         private System.Windows.Forms.Button vmdCancel;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColConditionElement;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         //private System.Windows.Forms.DataGridViewTextBoxColumn Condition;
     }
 }

@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.grdMain = new System.Windows.Forms.DataGridView();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmdAllGrayOut = new System.Windows.Forms.Button();
             this.cmdInvalid = new System.Windows.Forms.Button();
             this.cmdValid = new System.Windows.Forms.Button();
@@ -64,46 +63,24 @@
             this.groupCondition = new System.Windows.Forms.GroupBox();
             this.txtExternal = new System.Windows.Forms.TextBox();
             this.cmdExternal = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.grdMain)).BeginInit();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.grdMain = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.grdCondition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSequence)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupSequence.SuspendLayout();
             this.groupCondition.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdMain)).BeginInit();
+            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // grdMain
-            // 
-            this.grdMain.AllowUserToDeleteRows = false;
-            this.grdMain.AllowUserToResizeColumns = false;
-            this.grdMain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.grdMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdMain.Location = new System.Drawing.Point(12, 99);
-            this.grdMain.Name = "grdMain";
-            this.grdMain.RowHeadersVisible = false;
-            this.grdMain.RowTemplate.Height = 21;
-            this.grdMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.grdMain.Size = new System.Drawing.Size(473, 269);
-            this.grdMain.TabIndex = 0;
-            this.grdMain.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.grdMain_CellBeginEdit);
-            this.grdMain.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdMain_CellClick);
-            this.grdMain.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdMain_CellEndEdit);
-            this.grdMain.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdMain_CellEnter);
-            this.grdMain.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.grdMain_EditingControlShowing);
-            this.grdMain.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.grdMain_RowsAdded);
-            this.grdMain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grdMain_KeyDown);
             // 
             // cmdAllGrayOut
             // 
-            this.cmdAllGrayOut.Location = new System.Drawing.Point(128, 39);
+            this.cmdAllGrayOut.Location = new System.Drawing.Point(119, 3);
             this.cmdAllGrayOut.Name = "cmdAllGrayOut";
             this.cmdAllGrayOut.Size = new System.Drawing.Size(118, 28);
             this.cmdAllGrayOut.TabIndex = 1;
@@ -113,7 +90,7 @@
             // 
             // cmdInvalid
             // 
-            this.cmdInvalid.Location = new System.Drawing.Point(70, 40);
+            this.cmdInvalid.Location = new System.Drawing.Point(61, 3);
             this.cmdInvalid.Name = "cmdInvalid";
             this.cmdInvalid.Size = new System.Drawing.Size(52, 28);
             this.cmdInvalid.TabIndex = 2;
@@ -123,7 +100,7 @@
             // 
             // cmdValid
             // 
-            this.cmdValid.Location = new System.Drawing.Point(12, 40);
+            this.cmdValid.Location = new System.Drawing.Point(3, 3);
             this.cmdValid.Name = "cmdValid";
             this.cmdValid.Size = new System.Drawing.Size(52, 27);
             this.cmdValid.TabIndex = 3;
@@ -133,7 +110,7 @@
             // 
             // cmdAddColumn
             // 
-            this.cmdAddColumn.Location = new System.Drawing.Point(346, 40);
+            this.cmdAddColumn.Location = new System.Drawing.Point(335, 3);
             this.cmdAddColumn.Name = "cmdAddColumn";
             this.cmdAddColumn.Size = new System.Drawing.Size(69, 27);
             this.cmdAddColumn.TabIndex = 4;
@@ -143,7 +120,7 @@
             // 
             // cmdDeleteColumn
             // 
-            this.cmdDeleteColumn.Location = new System.Drawing.Point(421, 39);
+            this.cmdDeleteColumn.Location = new System.Drawing.Point(410, 3);
             this.cmdDeleteColumn.Name = "cmdDeleteColumn";
             this.cmdDeleteColumn.Size = new System.Drawing.Size(64, 28);
             this.cmdDeleteColumn.TabIndex = 5;
@@ -155,11 +132,14 @@
             // 
             this.txtTemplate.AcceptsReturn = true;
             this.txtTemplate.AcceptsTab = true;
+            this.txtTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTemplate.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtTemplate.Location = new System.Drawing.Point(12, 401);
+            this.txtTemplate.Location = new System.Drawing.Point(12, 410);
             this.txtTemplate.Multiline = true;
             this.txtTemplate.Name = "txtTemplate";
-            this.txtTemplate.Size = new System.Drawing.Size(980, 232);
+            this.txtTemplate.Size = new System.Drawing.Size(1045, 148);
             this.txtTemplate.TabIndex = 7;
             this.txtTemplate.TextChanged += new System.EventHandler(this.txtTemplate_TextChanged);
             // 
@@ -183,7 +163,7 @@
             this.grdCondition.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.grdCondition.RowTemplate.Height = 21;
             this.grdCondition.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdCondition.Size = new System.Drawing.Size(492, 130);
+            this.grdCondition.Size = new System.Drawing.Size(498, 120);
             this.grdCondition.TabIndex = 8;
             this.grdCondition.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCondition_CellDoubleClick);
             // 
@@ -216,7 +196,8 @@
             // 
             // cmdStart
             // 
-            this.cmdStart.Location = new System.Drawing.Point(828, 648);
+            this.cmdStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdStart.Location = new System.Drawing.Point(893, 564);
             this.cmdStart.Name = "cmdStart";
             this.cmdStart.Size = new System.Drawing.Size(164, 27);
             this.cmdStart.TabIndex = 9;
@@ -228,7 +209,7 @@
             // 
             this.lblCount.AutoSize = true;
             this.lblCount.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblCount.Location = new System.Drawing.Point(12, 371);
+            this.lblCount.Location = new System.Drawing.Point(3, 349);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(130, 24);
             this.lblCount.TabIndex = 10;
@@ -256,8 +237,9 @@
             // 
             // chkPreview
             // 
+            this.chkPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkPreview.AutoSize = true;
-            this.chkPreview.Location = new System.Drawing.Point(528, 654);
+            this.chkPreview.Location = new System.Drawing.Point(762, 570);
             this.chkPreview.Name = "chkPreview";
             this.chkPreview.Size = new System.Drawing.Size(92, 16);
             this.chkPreview.TabIndex = 13;
@@ -267,16 +249,16 @@
             // 
             // txtCellText
             // 
-            this.txtCellText.Location = new System.Drawing.Point(12, 74);
+            this.txtCellText.Location = new System.Drawing.Point(3, 46);
             this.txtCellText.Name = "txtCellText";
             this.txtCellText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCellText.Size = new System.Drawing.Size(473, 19);
+            this.txtCellText.Size = new System.Drawing.Size(490, 19);
             this.txtCellText.TabIndex = 15;
             this.txtCellText.TextChanged += new System.EventHandler(this.txtCellText_TextChanged);
             // 
             // cmdMoveLeft
             // 
-            this.cmdMoveLeft.Location = new System.Drawing.Point(253, 40);
+            this.cmdMoveLeft.Location = new System.Drawing.Point(243, 3);
             this.cmdMoveLeft.Name = "cmdMoveLeft";
             this.cmdMoveLeft.Size = new System.Drawing.Size(40, 27);
             this.cmdMoveLeft.TabIndex = 16;
@@ -286,7 +268,7 @@
             // 
             // cmdMoveRight
             // 
-            this.cmdMoveRight.Location = new System.Drawing.Point(300, 40);
+            this.cmdMoveRight.Location = new System.Drawing.Point(289, 3);
             this.cmdMoveRight.Name = "cmdMoveRight";
             this.cmdMoveRight.Size = new System.Drawing.Size(40, 27);
             this.cmdMoveRight.TabIndex = 17;
@@ -308,7 +290,7 @@
             this.grdSequence.RowHeadersVisible = false;
             this.grdSequence.RowTemplate.Height = 21;
             this.grdSequence.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdSequence.Size = new System.Drawing.Size(488, 95);
+            this.grdSequence.Size = new System.Drawing.Size(498, 97);
             this.grdSequence.TabIndex = 18;
             this.grdSequence.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdSequence_CellDoubleClick);
             // 
@@ -333,7 +315,7 @@
             this.編集ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1011, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1068, 24);
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -397,24 +379,26 @@
             // 
             // groupSequence
             // 
+            this.groupSequence.AutoSize = true;
             this.groupSequence.Controls.Add(this.cmdDeleteSequence);
             this.groupSequence.Controls.Add(this.cmdAddSequence);
             this.groupSequence.Controls.Add(this.grdSequence);
-            this.groupSequence.Location = new System.Drawing.Point(491, 27);
+            this.groupSequence.Location = new System.Drawing.Point(3, 3);
             this.groupSequence.Name = "groupSequence";
-            this.groupSequence.Size = new System.Drawing.Size(510, 153);
+            this.groupSequence.Size = new System.Drawing.Size(513, 167);
             this.groupSequence.TabIndex = 23;
             this.groupSequence.TabStop = false;
             this.groupSequence.Text = "シーケンス";
             // 
             // groupCondition
             // 
+            this.groupCondition.AutoSize = true;
             this.groupCondition.Controls.Add(this.cmdDeleteCondition);
             this.groupCondition.Controls.Add(this.cmdAddCondition);
             this.groupCondition.Controls.Add(this.grdCondition);
-            this.groupCondition.Location = new System.Drawing.Point(491, 186);
+            this.groupCondition.Location = new System.Drawing.Point(3, 176);
             this.groupCondition.Name = "groupCondition";
-            this.groupCondition.Size = new System.Drawing.Size(510, 197);
+            this.groupCondition.Size = new System.Drawing.Size(513, 190);
             this.groupCondition.TabIndex = 24;
             this.groupCondition.TabStop = false;
             this.groupCondition.Text = "条件付き文字列";
@@ -440,27 +424,74 @@
             this.cmdExternal.UseVisualStyleBackColor = true;
             this.cmdExternal.Click += new System.EventHandler(this.cmdExternal_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.cmdValid);
+            this.flowLayoutPanel1.Controls.Add(this.cmdInvalid);
+            this.flowLayoutPanel1.Controls.Add(this.cmdAllGrayOut);
+            this.flowLayoutPanel1.Controls.Add(this.cmdMoveLeft);
+            this.flowLayoutPanel1.Controls.Add(this.cmdMoveRight);
+            this.flowLayoutPanel1.Controls.Add(this.cmdAddColumn);
+            this.flowLayoutPanel1.Controls.Add(this.cmdDeleteColumn);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(483, 37);
+            this.flowLayoutPanel1.TabIndex = 27;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.flowLayoutPanel1);
+            this.flowLayoutPanel2.Controls.Add(this.txtCellText);
+            this.flowLayoutPanel2.Controls.Add(this.grdMain);
+            this.flowLayoutPanel2.Controls.Add(this.lblCount);
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 27);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(505, 377);
+            this.flowLayoutPanel2.TabIndex = 29;
+            // 
+            // grdMain
+            // 
+            this.grdMain.AllowUserToDeleteRows = false;
+            this.grdMain.AllowUserToResizeColumns = false;
+            this.grdMain.AllowUserToResizeRows = false;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.grdMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdMain.Location = new System.Drawing.Point(3, 71);
+            this.grdMain.Name = "grdMain";
+            this.grdMain.RowHeadersVisible = false;
+            this.grdMain.RowTemplate.Height = 21;
+            this.grdMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.grdMain.Size = new System.Drawing.Size(490, 275);
+            this.grdMain.TabIndex = 28;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.groupSequence);
+            this.flowLayoutPanel3.Controls.Add(this.groupCondition);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(534, 27);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(523, 377);
+            this.flowLayoutPanel3.TabIndex = 30;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1011, 682);
-            this.Controls.Add(this.groupCondition);
-            this.Controls.Add(this.groupSequence);
+            this.ClientSize = new System.Drawing.Size(1068, 598);
+            this.Controls.Add(this.flowLayoutPanel3);
+            this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.cmdMoveRight);
-            this.Controls.Add(this.cmdMoveLeft);
-            this.Controls.Add(this.txtCellText);
             this.Controls.Add(this.chkPreview);
-            this.Controls.Add(this.lblCount);
             this.Controls.Add(this.cmdStart);
             this.Controls.Add(this.txtTemplate);
-            this.Controls.Add(this.cmdDeleteColumn);
-            this.Controls.Add(this.cmdAddColumn);
-            this.Controls.Add(this.cmdValid);
-            this.Controls.Add(this.cmdInvalid);
-            this.Controls.Add(this.cmdAllGrayOut);
-            this.Controls.Add(this.grdMain);
             this.Controls.Add(this.txtExternal);
             this.Controls.Add(this.cmdExternal);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -468,21 +499,24 @@
             this.Name = "frmMain";
             this.Text = "らくらく網羅くんV2";
             this.Load += new System.EventHandler(this.frmMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.grdMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdCondition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSequence)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupSequence.ResumeLayout(false);
             this.groupCondition.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdMain)).EndInit();
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView grdMain;
         private System.Windows.Forms.Button cmdAllGrayOut;
         private System.Windows.Forms.Button cmdInvalid;
         private System.Windows.Forms.Button cmdValid;
@@ -517,5 +551,9 @@
         private System.Windows.Forms.GroupBox groupCondition;
         private System.Windows.Forms.TextBox txtExternal;
         private System.Windows.Forms.Button cmdExternal;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.DataGridView grdMain;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
     }
 }
