@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditSequence));
             this.grdSeqItems = new System.Windows.Forms.DataGridView();
             this.SeqVAlue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.combName = new System.Windows.Forms.ComboBox();
@@ -190,6 +191,7 @@
             this.Controls.Add(this.cmdSet);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmEditSequence";
             this.Text = "シーケンス設定";
             this.Load += new System.EventHandler(this.frmEditSequence_Load);

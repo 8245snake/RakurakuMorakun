@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dialogNumericInputBox));
             this.lblMessage = new System.Windows.Forms.Label();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.cmdCancel = new System.Windows.Forms.Button();
@@ -85,6 +86,7 @@
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.txtInput);
             this.Controls.Add(this.lblMessage);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "dialogNumericInputBox";
             this.Text = "dialogInputBox";
             this.ResumeLayout(false);

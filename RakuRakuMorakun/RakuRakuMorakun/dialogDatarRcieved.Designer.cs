@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dialogDatarRcieved));
             this.lblMessage = new System.Windows.Forms.Label();
             this.cmdTemplate = new System.Windows.Forms.Button();
             this.cmdIterator = new System.Windows.Forms.Button();
@@ -95,6 +96,7 @@
             this.Controls.Add(this.cmdIterator);
             this.Controls.Add(this.cmdTemplate);
             this.Controls.Add(this.lblMessage);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "dialogDatarRcieved";
             this.Text = "データ反映先設定";
             this.Load += new System.EventHandler(this.dialogDatarRcieved_Load);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInputAssist));
             this.txtWork = new System.Windows.Forms.TextBox();
             this.cmdConvert = new System.Windows.Forms.Button();
             this.combConvertType = new System.Windows.Forms.ComboBox();
@@ -102,6 +103,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(385, 309);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmInputAssist";
             this.Text = "入力支援";
             this.Load += new System.EventHandler(this.frmInputAssist_Load);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConditionSummary));
             this.grdSummary = new System.Windows.Forms.DataGridView();
             this.cmdClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdSummary)).BeginInit();
@@ -67,6 +68,7 @@
             this.ClientSize = new System.Drawing.Size(303, 274);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.grdSummary);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmConditionSummary";
             this.Text = "条件付き文字列サマリ";
             this.Load += new System.EventHandler(this.frmConditionSummary_Load);

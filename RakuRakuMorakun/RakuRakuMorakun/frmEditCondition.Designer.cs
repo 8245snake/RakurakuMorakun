@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditCondition));
             this.cmdSet = new System.Windows.Forms.Button();
             this.combCondition = new System.Windows.Forms.ComboBox();
             this.lblGa = new System.Windows.Forms.Label();
@@ -277,6 +278,7 @@
             this.Controls.Add(this.combCondition);
             this.Controls.Add(this.cmdSet);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmEditCondition";
             this.Text = "条件付き文字列";
             this.Load += new System.EventHandler(this.frmEditCondition_Load);
