@@ -168,6 +168,7 @@
             this.txtTrue.Name = "txtTrue";
             this.txtTrue.Size = new System.Drawing.Size(414, 49);
             this.txtTrue.TabIndex = 11;
+            this.txtTrue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTrue_KeyDown);
             // 
             // txtFalse
             // 
@@ -176,6 +177,7 @@
             this.txtFalse.Name = "txtFalse";
             this.txtFalse.Size = new System.Drawing.Size(414, 49);
             this.txtFalse.TabIndex = 12;
+            this.txtFalse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFalse_KeyDown);
             // 
             // combAndOr
             // 

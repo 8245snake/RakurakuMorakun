@@ -340,6 +340,15 @@ namespace RakuRakuMorakun
         /// 結果表示関係のイベント
         /// /////////////////////////////////////////////////////////////////////////////////////
 
+        //ショートカット
+        private void txtTemplate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A && e.Control) //Ctr + A）
+            {
+                txtTemplate.SelectAll();
+            }
+        }
+
         //開始ボタン
         private void cmdStart_Click(object sender, EventArgs e)
         {

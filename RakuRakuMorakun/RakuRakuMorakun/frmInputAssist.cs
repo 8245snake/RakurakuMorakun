@@ -60,6 +60,14 @@ namespace RakuRakuMorakun
 
             txtWork.Text = txtWork.Text.Replace(CtpConverters[nIndex].OldString, CtpConverters[nIndex].NewString );
         }
+
+        private void txtWork_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A && e.Control) //Ctr + A）
+            {
+                txtWork.SelectAll();
+            }
+        }
     }
 
 

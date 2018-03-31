@@ -275,5 +275,21 @@ namespace RakuRakuMorakun
         {
             this.Dispose();
         }
+
+        private void txtTrue_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A && e.Control) //Ctr + A）
+            {
+                txtTrue.SelectAll();
+            }
+        }
+
+        private void txtFalse_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A && e.Control) //Ctr + A）
+            {
+                txtFalse.SelectAll();
+            }
+        }
     }
 }

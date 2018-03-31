@@ -47,6 +47,7 @@
             this.txtWork.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtWork.Size = new System.Drawing.Size(360, 232);
             this.txtWork.TabIndex = 0;
+            this.txtWork.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWork_KeyDown);
             // 
             // cmdConvert
             // 
@@ -101,7 +102,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(385, 309);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmInputAssist";
             this.Text = "入力支援";
             this.Load += new System.EventHandler(this.frmInputAssist_Load);
