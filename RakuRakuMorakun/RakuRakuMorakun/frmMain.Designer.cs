@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmdAllGrayOut = new System.Windows.Forms.Button();
             this.cmdInvalid = new System.Windows.Forms.Button();
             this.cmdValid = new System.Windows.Forms.Button();
@@ -52,10 +52,10 @@
             this.SeqName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SeqValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menueFile = new System.Windows.Forms.ToolStripMenuItem();
             this.Save = new System.Windows.Forms.ToolStripMenuItem();
             this.Open = new System.Windows.Forms.ToolStripMenuItem();
-            this.編集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menueEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.InputAssist = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdDeleteSequence = new System.Windows.Forms.Button();
             this.cmdAddSequence = new System.Windows.Forms.Button();
@@ -67,6 +67,8 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.grdMain = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.Setting = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmdConditionsSummary = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdCondition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSequence)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -311,49 +313,50 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ファイルToolStripMenuItem,
-            this.編集ToolStripMenuItem});
+            this.menueFile,
+            this.menueEdit});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1068, 24);
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // ファイルToolStripMenuItem
+            // menueFile
             // 
-            this.ファイルToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menueFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Save,
-            this.Open});
-            this.ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
-            this.ファイルToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.ファイルToolStripMenuItem.Text = "ファイル";
+            this.Open,
+            this.Setting});
+            this.menueFile.Name = "menueFile";
+            this.menueFile.Size = new System.Drawing.Size(53, 20);
+            this.menueFile.Text = "ファイル";
             // 
             // Save
             // 
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(98, 22);
+            this.Save.Size = new System.Drawing.Size(180, 22);
             this.Save.Text = "保存";
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Open
             // 
             this.Open.Name = "Open";
-            this.Open.Size = new System.Drawing.Size(98, 22);
+            this.Open.Size = new System.Drawing.Size(180, 22);
             this.Open.Text = "開く";
             this.Open.Click += new System.EventHandler(this.Open_Click);
             // 
-            // 編集ToolStripMenuItem
+            // menueEdit
             // 
-            this.編集ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menueEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.InputAssist});
-            this.編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
-            this.編集ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.編集ToolStripMenuItem.Text = "編集";
+            this.menueEdit.Name = "menueEdit";
+            this.menueEdit.Size = new System.Drawing.Size(43, 20);
+            this.menueEdit.Text = "編集";
             // 
             // InputAssist
             // 
             this.InputAssist.Name = "InputAssist";
-            this.InputAssist.Size = new System.Drawing.Size(122, 22);
+            this.InputAssist.Size = new System.Drawing.Size(180, 22);
             this.InputAssist.Text = "入力支援";
             this.InputAssist.Click += new System.EventHandler(this.InputAssist_Click);
             // 
@@ -393,6 +396,7 @@
             // groupCondition
             // 
             this.groupCondition.AutoSize = true;
+            this.groupCondition.Controls.Add(this.cmdConditionsSummary);
             this.groupCondition.Controls.Add(this.cmdDeleteCondition);
             this.groupCondition.Controls.Add(this.cmdAddCondition);
             this.groupCondition.Controls.Add(this.grdCondition);
@@ -455,14 +459,14 @@
             this.grdMain.AllowUserToDeleteRows = false;
             this.grdMain.AllowUserToResizeColumns = false;
             this.grdMain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.grdMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdMain.Location = new System.Drawing.Point(3, 71);
             this.grdMain.Name = "grdMain";
@@ -481,6 +485,23 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(523, 377);
             this.flowLayoutPanel3.TabIndex = 30;
             // 
+            // Setting
+            // 
+            this.Setting.Name = "Setting";
+            this.Setting.Size = new System.Drawing.Size(180, 22);
+            this.Setting.Text = "設定";
+            this.Setting.Click += new System.EventHandler(this.Setting_Click);
+            // 
+            // cmdConditionsSummary
+            // 
+            this.cmdConditionsSummary.Location = new System.Drawing.Point(227, 18);
+            this.cmdConditionsSummary.Name = "cmdConditionsSummary";
+            this.cmdConditionsSummary.Size = new System.Drawing.Size(103, 28);
+            this.cmdConditionsSummary.TabIndex = 13;
+            this.cmdConditionsSummary.Text = "サマリー表示";
+            this.cmdConditionsSummary.UseVisualStyleBackColor = true;
+            this.cmdConditionsSummary.Click += new System.EventHandler(this.cmdConditionsSummary_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -494,7 +515,6 @@
             this.Controls.Add(this.txtTemplate);
             this.Controls.Add(this.txtExternal);
             this.Controls.Add(this.cmdExternal);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "らくらく網羅くんV2";
@@ -534,7 +554,7 @@
         private System.Windows.Forms.Button cmdMoveRight;
         private System.Windows.Forms.DataGridView grdSequence;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menueFile;
         private System.Windows.Forms.ToolStripMenuItem Save;
         private System.Windows.Forms.ToolStripMenuItem Open;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConditionName;
@@ -543,7 +563,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FalseText;
         private System.Windows.Forms.Button cmdDeleteSequence;
         private System.Windows.Forms.Button cmdAddSequence;
-        private System.Windows.Forms.ToolStripMenuItem 編集ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menueEdit;
         private System.Windows.Forms.ToolStripMenuItem InputAssist;
         private System.Windows.Forms.DataGridViewTextBoxColumn SeqName;
         private System.Windows.Forms.DataGridViewTextBoxColumn SeqValue;
@@ -555,5 +575,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.DataGridView grdMain;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.ToolStripMenuItem Setting;
+        private System.Windows.Forms.Button cmdConditionsSummary;
     }
 }

@@ -220,7 +220,7 @@ namespace RakuRakuMorakun
         //行が追加されたとき
         private void grdMain_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            //controller.InvalidNewRow(grdMain);
+            UpdateGridData();
         }
 
         /// /////////////////////////////////////////////////////////////////////////////////////
@@ -273,11 +273,18 @@ namespace RakuRakuMorakun
             controller.SetConditionToGrid(grdCondition);
         }
 
+        //サマリー表示
+        private void cmdConditionsSummary_Click(object sender, EventArgs e)
+        {
+            frmConditionSummary frmH = new frmConditionSummary(controller);
+            frmH.ShowDialog();
+            frmH.Dispose();
+        }
 
         /// /////////////////////////////////////////////////////////////////////////////////////
         /// シーケンス関係のイベント
         /// /////////////////////////////////////////////////////////////////////////////////////
-        
+
         //シーケンス追加ボタン
         private void cmdAddSequence_Click(object sender, EventArgs e)
         {
@@ -400,6 +407,13 @@ namespace RakuRakuMorakun
             }
         }
 
+        //設定
+        private void Setting_Click(object sender, EventArgs e)
+        {
+            frmSetting frmG = new frmSetting();
+            frmG.ShowDialog();
+            frmG.Dispose();
+        }
 
         /// //////////////////////////////////////////////////////////////////////////////////////
         /// 外部連携関係のイベント
@@ -484,9 +498,6 @@ namespace RakuRakuMorakun
             txtExternal_TextChanged(sender,e);
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
     }
 }

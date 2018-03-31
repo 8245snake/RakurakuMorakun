@@ -15,6 +15,7 @@ namespace RakuRakuMorakun
         private GridController CtpController;
         private Sequence CtpSequence;
         private int CnEditableColumn; //ユーザーが入力できる列
+        private readonly string COL_ITEM = "項目";
 
         public frmEditSequence(GridController controller, string stName)
         {
@@ -32,6 +33,8 @@ namespace RakuRakuMorakun
         {
             long lRowsCount = grdSeqItems.Rows.Count;
             string[] stItems = new string[lRowsCount];
+
+            CnEditableColumn = CtpController.GetColIndexByHeaderText(grdSeqItems,COL_ITEM);
 
             //グリッドの内容を取り込む
             for (int nRow = 0; nRow < lRowsCount; nRow++)
@@ -66,7 +69,14 @@ namespace RakuRakuMorakun
             }
             else if (e.KeyCode == Keys.V && e.Control) //Ctr + V（ペースト）
             {
-                CtpController.PasteGrid(grdSeqItems, false);
+                
+                CnEditableColumn = CtpController.GetColIndexByHeaderText(grdSeqItems, COL_ITEM);
+                
+                if (CnEditableColumn == CtpController.GetSelectedCell(grdSeqItems).ColumnIndex)
+                {
+                    CtpController.PasteGrid(grdSeqItems, false);
+                }
+                
             }
             else if (e.KeyCode == Keys.C && e.Control) //Ctr + C（コピー）
             {
@@ -95,7 +105,7 @@ namespace RakuRakuMorakun
                 grdSeqItems.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            grdSeqItems.Columns.Add("Item", "項目");
+            grdSeqItems.Columns.Add("Item", COL_ITEM);
             grdSeqItems.Columns[CnEditableColumn].SortMode = DataGridViewColumnSortMode.NotSortable;
 
             //インデックスを初期化
@@ -123,20 +133,23 @@ namespace RakuRakuMorakun
                 nNextFlg = tpData.NextIndex();
 
             }
+
+            //列の位置をユーザーが変更できるようにする
+            grdSeqItems.AllowUserToOrderColumns = true;
         }
+
+
 
         //列ヘッダー名と行数を指定して値を入れる。色をグレーにする。
         private void SetCellByColName(string stColName, int nRow, string stValue)
         {
-            for (int i = 0; i < grdSeqItems.Columns.Count; i++)
-            {
-                if(grdSeqItems.Columns[i].HeaderText == stColName)
-                {
-                    grdSeqItems[i, nRow].Value = stValue;
-                    grdSeqItems[i, nRow].Style.BackColor = Color.LightGray;
+            int nTargetCol = CtpController.GetColIndexByHeaderText(grdSeqItems, stColName);
 
-                }
-            }
+            if (nTargetCol < 0) { return; }
+
+            grdSeqItems[nTargetCol, nRow].Value = stValue;
+            grdSeqItems[nTargetCol, nRow].Style.BackColor = Color.LightGray;
+
         }
 
         //グリッド初期化
@@ -169,15 +182,7 @@ namespace RakuRakuMorakun
         {
             string stName = combName.Items[combName.SelectedIndex].ToString();
             string stItem = combItem.Items[combItem.SelectedIndex].ToString();
-            int nTargetCol = 0;
-
-            for (int i = 0; i < grdSeqItems.ColumnCount; i++)
-            {
-                if (grdSeqItems.Columns[i].HeaderText == stName)
-                {
-                    nTargetCol = i;
-                }
-            }
+            int nTargetCol = CtpController.GetColIndexByHeaderText(grdSeqItems, stName);
 
             for (int lRow = 0; lRow < grdSeqItems.RowCount; lRow++)
             {

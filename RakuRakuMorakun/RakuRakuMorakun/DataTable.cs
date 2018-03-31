@@ -62,7 +62,9 @@ namespace RakuRakuMorakun
             Array.Resize(ref CtpTable, nMax - 1);
         }
 
-        //インデックス配列を初期化する。カウントアップの前に呼ぶ。
+        /// <summary>
+        /// インデックス配列を初期化する。カウントアップの前に呼ぶ。
+        /// </summary>
         public void InitIndex()
         {
             CnIndexArray = new int[CtpTable.Length];

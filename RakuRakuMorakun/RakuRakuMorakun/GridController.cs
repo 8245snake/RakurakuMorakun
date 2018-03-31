@@ -37,7 +37,6 @@ namespace RakuRakuMorakun
         /// //////////////////////////////////////////////////////////////////////////////////////
 
         public long Total { get { return CtpDataTable.Total; } }
-        //public string[] Names { get { return CtpDataTable.GetNames(); } }
         public string Template { get { return CstTemplate; } set { CstTemplate = value; } }
 
         /// //////////////////////////////////////////////////////////////////////////////////////
@@ -108,7 +107,6 @@ namespace RakuRakuMorakun
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
         }
 
         //右端に列を追加
@@ -408,6 +406,28 @@ namespace RakuRakuMorakun
             return string.Format(TEXT_FORMAT_CONDITION, CnConditionCount.ToString());
         }
 
+        public Condition[] GetConditions()
+        {
+            return CtpConditionArr;
+        }
+
+        /// <summary>
+        /// 条件付き文字列の名前の配列を返す
+        /// </summary>
+        /// <returns>条件付き文字列の名前の配列</returns>
+        public string[] GetConditionNames()
+        {
+            string[] ConditionNames;
+
+            ConditionNames = new string[CtpConditionArr.Length];
+
+            for (int i = 0; i < CtpConditionArr.Length; i++)
+            {
+                ConditionNames[i] = CtpConditionArr[i].Name;
+            }
+
+            return ConditionNames;
+        }
 
         /// //////////////////////////////////////////////////////////////////////////////////////
         /// シーケンス
@@ -493,6 +513,24 @@ namespace RakuRakuMorakun
             return string.Format(TEXT_FORMAT_SEQUENCE, CnSequenceCount.ToString());
         }
 
+        public Sequence[] GetSequences()
+        {
+            return CtpSequenceArr;
+        }
+
+        public string[] GetSequenceNames()
+        {
+            string[] SequenceNames;
+
+            SequenceNames = new string[CtpSequenceArr.Length];
+
+            for (int i = 0; i < CtpSequenceArr.Length; i++)
+            {
+                SequenceNames[i] = CtpSequenceArr[i].Name;
+            }
+
+            return SequenceNames;
+        }
 
         /// //////////////////////////////////////////////////////////////////////////////////////
         /// グリッド操作関係
@@ -519,8 +557,40 @@ namespace RakuRakuMorakun
             return DataGrid[nColMin, nRowMin];
         }
 
+
+        //第二引数がtrueなら表示されている列数を返す
+        public int GetColumnCount(DataGridView grdDataGrid, bool blOnlyVisibleColumn = true)
+        {
+            if (!blOnlyVisibleColumn) { return grdDataGrid.ColumnCount; }
+
+            int nCount = 0;
+
+            for (int i = 0; i < grdDataGrid.ColumnCount; i++)
+            {
+                if (grdDataGrid.Columns[i].Visible) { nCount++; }
+            }
+
+            return nCount;
+        }
+
+        //第二引数がtrueなら表示されている行数を返す
+        public int GetRowCount(DataGridView grdDataGrid, bool blOnlyVisibleRow = true)
+        {
+            if (!blOnlyVisibleRow) { return grdDataGrid.RowCount; }
+
+            int nCount = 0;
+
+            for (int i = 0; i < grdDataGrid.RowCount; i++)
+            {
+                if (grdDataGrid.Rows[i].Visible) { nCount++; }
+            }
+
+            return nCount;
+        }
+
+
         //選択しているcell（左上）からペーストする。行数をオーバーするとき追加するか指定できる
-        public void PasteGrid(DataGridView grdDataGrid, bool blAddRow = true)
+        public void PasteGrid(DataGridView grdDataGrid, bool blAddRow = true, bool blOnlyVisibleCell = true)
         {
             //クリップボードに文字列データがなければ抜ける
             if (!Clipboard.ContainsText()) { return; }
@@ -530,7 +600,7 @@ namespace RakuRakuMorakun
 
             string[] stRowsArr = stText.Split(new string[] { "\r\n" }, StringSplitOptions.None);
             int nSelectedRow = GetSelectedCell(grdDataGrid).RowIndex;
-            int nNeedAddRows = nSelectedRow + stRowsArr.Length - grdDataGrid.RowCount;
+            int nNeedAddRows = nSelectedRow + stRowsArr.Length - GetRowCount(grdDataGrid, blOnlyVisibleCell);
 
             if (blAddRow)
             {
@@ -541,20 +611,31 @@ namespace RakuRakuMorakun
                 }
             }
 
-            for (int i = 0; i < stRowsArr.Length; i++)
+
+            int nCount = 0;
+
+            for (int i = nSelectedRow; i < grdDataGrid.RowCount; i++)
             {
-                PasteRow(grdDataGrid, i + nSelectedRow, stRowsArr[i], blAddRow);
+                if (stRowsArr.Length <= nCount) { break; }
+
+                if (grdDataGrid.Rows[i].Visible)
+                {
+                    PasteRow(grdDataGrid, i, stRowsArr[nCount], blAddRow);
+                    nCount++;
+                }
+
             }
 
         }
 
+
         //改行区切りの1列を貼り付ける。列数をオーバーするとき追加するか指定できる
-        public void PasteRow(DataGridView grdDataGrid, int nRow, string stText, bool blAddColumn = true)
+        public void PasteRow(DataGridView grdDataGrid, int nRow, string stText, bool blAddColumn = true, bool blOnlyVisibleCell = true)
         {
 
             string[] stColsArr = stText.Split(new string[] { "\t" }, StringSplitOptions.None);
             int nSelectedColumn = GetSelectedCell(grdDataGrid).ColumnIndex;
-            int nNeedAddCols = nSelectedColumn + stColsArr.Length - grdDataGrid.ColumnCount;
+            int nNeedAddCols = nSelectedColumn + stColsArr.Length - GetColumnCount(grdDataGrid, blOnlyVisibleCell);
 
             if (blAddColumn) //足りない分の列を追加
             {
@@ -564,12 +645,18 @@ namespace RakuRakuMorakun
                 }
             }
 
-            for (int i = 0; i < stColsArr.Length; i++)
-            {
-                if (grdDataGrid.Columns.Count - 1 < i + nSelectedColumn) { break; }
-                if (grdDataGrid.Rows.Count - 1 < nRow) { break; }
+            int nCount = 0;
 
-                grdDataGrid[i + nSelectedColumn, nRow].Value = stColsArr[i];
+            for (int i = nSelectedColumn; i < grdDataGrid.ColumnCount; i++)
+            {
+                if (stColsArr.Length <= nCount) { break; }
+
+                if (grdDataGrid[i, nRow].Visible)
+                {
+                    grdDataGrid[i, nRow].Value = stColsArr[nCount];
+                    nCount++;
+                }
+                
             }
 
         }
@@ -624,6 +711,19 @@ namespace RakuRakuMorakun
             Clipboard.SetText(stResult);
         }
 
+        //列タイトルを渡して列インデックスを返す
+        public int GetColIndexByHeaderText(DataGridView grdData, string stColName)
+        {
+            for (int i = 0; i < grdData.ColumnCount; i++)
+            {
+                if (grdData.Columns[i].HeaderText == stColName)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         /// //////////////////////////////////////////////////////////////////////////////////////
         /// その他の関数
         /// //////////////////////////////////////////////////////////////////////////////////////
@@ -654,13 +754,13 @@ namespace RakuRakuMorakun
             }
 
             //1件はかならずある
-            stResult[lCount++] = Converter.ConvertStrData(stTemplate, CtpDataTable, CtpConditionArr, CtpSequenceArr);
+            stResult[lCount++] = Converter.ConvertStrData(stTemplate, this);
             //取得予定件数に達したら終了
             if (lCount >= lGetCount) { return stResult; }
             int nRtn = CtpDataTable.NextIndex();
             while (nRtn == (int)INDEX_FLAG.NEXT)
             {
-                stResult[lCount++] = Converter.ConvertStrData(stTemplate, CtpDataTable, CtpConditionArr, CtpSequenceArr);
+                stResult[lCount++] = Converter.ConvertStrData(stTemplate, this);
                 nRtn = CtpDataTable.NextIndex();
                 //取得予定件数に達したら終了
                 if (lCount >= lGetCount) { return stResult; }
