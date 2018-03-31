@@ -109,7 +109,7 @@ namespace RakuRakuMorakun
             if (!optIterator.Checked) { return; }
 
             combCondition.Items.Clear();
-            string[] stNamesArr = CtpController.Names;
+            string[] stNamesArr = CtpController.GetNames();
             for (int i = 0; i < stNamesArr.Length; i++)
             {
                 combCondition.Items.Add(stNamesArr[i]);

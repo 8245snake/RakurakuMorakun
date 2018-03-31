@@ -37,7 +37,7 @@ namespace RakuRakuMorakun
         /// //////////////////////////////////////////////////////////////////////////////////////
 
         public long Total { get { return CtpDataTable.Total; } }
-        public string[] Names { get { return CtpDataTable.GetNames(); } }
+        //public string[] Names { get { return CtpDataTable.GetNames(); } }
         public string Template { get { return CstTemplate; } set { CstTemplate = value; } }
 
         /// //////////////////////////////////////////////////////////////////////////////////////
@@ -313,6 +313,15 @@ namespace RakuRakuMorakun
 
             return stItemsArr;
             
+        }
+
+        public DataTable GetDataTable() {
+            return CtpDataTable;
+        }
+
+        public string[] GetNames()
+        {
+            return CtpDataTable.GetNames();
         }
 
         /// //////////////////////////////////////////////////////////////////////////////////////

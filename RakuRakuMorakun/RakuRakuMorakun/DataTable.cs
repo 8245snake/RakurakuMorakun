@@ -110,7 +110,7 @@ namespace RakuRakuMorakun
             int nRow;
             for (int nColumn = 0; nColumn < CnIndexArray.Length; nColumn++)
             {
-                if (!CtpTable[nColumn].Enabled()) { continue; }
+                if (!CtpTable[nColumn].IsEnabled) { continue; }
                 stKey = CtpTable[nColumn].Name;
                 nRow = CnIndexArray[nColumn];
                 stValue = Item(nRow, nColumn);
@@ -183,16 +183,27 @@ namespace RakuRakuMorakun
         }
 
 
-        //反復子名の配列を取得。無効でも取得する。
-        public string[] GetNames()
+        //反復子名の配列を取得
+        public string[] GetNames(bool blOnlyEnabled = true)
         {
             string[] stNames = new string[CtpTable.Length];
+            int nCount = 0;
 
-            for (int nCol = 0; nCol < CtpTable.Length; nCol++)
+
+            for (int i = 0; i < CtpTable.Length; i++)
             {
-                stNames[nCol] = CtpTable[nCol].Name;
+                if (CtpTable[i].IsEnabled || !blOnlyEnabled)
+                {
+                    stNames[nCount] = CtpTable[i].Name;
+                    nCount++;
+                }
+
             }
+
+            if (blOnlyEnabled) { Array.Resize(ref stNames, nCount); }
+
             return stNames;
+            
         }
 
         //名前から要素の配列を返す。無効なものも返す。ついでにインデックスも返す。

@@ -130,13 +130,16 @@ namespace RakuRakuMorakun
         }
 
         //全部FalseのときはFalseを返す
-        public bool Enabled()
+        public bool IsEnabled
         {
-            for (int i = 0; i < CblValidityArr.Length; i++)
+            get
             {
-                if (CblValidityArr[i]) { return true; }
+                for (int i = 0; i < CblValidityArr.Length; i++)
+                {
+                    if (CblValidityArr[i]) { return true; }
+                }
+                return false;
             }
-            return false;
         }
 
         public string Name { set { CstName = value; } get { return CstName; } }

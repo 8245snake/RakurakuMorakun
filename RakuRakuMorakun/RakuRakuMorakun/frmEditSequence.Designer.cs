@@ -77,6 +77,7 @@
             this.combName.Name = "combName";
             this.combName.Size = new System.Drawing.Size(82, 20);
             this.combName.TabIndex = 3;
+            this.combName.TextChanged += new System.EventHandler(this.combName_TextChanged);
             // 
             // combItem
             // 
@@ -97,6 +98,7 @@
             this.cmdSearch.TabIndex = 5;
             this.cmdSearch.Text = "絞り込み";
             this.cmdSearch.UseVisualStyleBackColor = true;
+            this.cmdSearch.Click += new System.EventHandler(this.cmdSearch_Click);
             // 
             // lblEqual
             // 
@@ -127,6 +129,7 @@
             this.cmdReverse.TabIndex = 8;
             this.cmdReverse.Text = "表示を反転";
             this.cmdReverse.UseVisualStyleBackColor = true;
+            this.cmdReverse.Click += new System.EventHandler(this.cmdReverse_Click);
             // 
             // cmdReset
             // 
@@ -136,6 +139,7 @@
             this.cmdReset.TabIndex = 7;
             this.cmdReset.Text = "全て表示";
             this.cmdReset.UseVisualStyleBackColor = true;
+            this.cmdReset.Click += new System.EventHandler(this.cmdReset_Click);
             // 
             // cmdCancel
             // 
