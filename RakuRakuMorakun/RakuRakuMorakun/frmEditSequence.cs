@@ -72,7 +72,7 @@ namespace RakuRakuMorakun
                 
                 CnEditableColumn = CtpController.GetColIndexByHeaderText(grdSeqItems, COL_ITEM);
                 
-                if (CnEditableColumn == CtpController.GetSelectedCell(grdSeqItems).ColumnIndex)
+                if (CnEditableColumn == GridController.GetSelectedCell(grdSeqItems).ColumnIndex)
                 {
                     CtpController.PasteGrid(grdSeqItems, false);
                 }

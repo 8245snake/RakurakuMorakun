@@ -536,8 +536,11 @@ namespace RakuRakuMorakun
         /// グリッド操作関係
         /// //////////////////////////////////////////////////////////////////////////////////////
 
-        //選択されているセルの中の最も左上のセルを返す。選択されていなければnullを返す
-        public DataGridViewCell GetSelectedCell(DataGridView DataGrid)
+        /// <summary>
+        /// 選択されているセルの中の最も左上のセルを返す。選択されていなければnullを返す
+        /// </summary>
+        /// <returns></returns>
+        public static DataGridViewCell GetSelectedCell(DataGridView DataGrid)
         {
             int nColMin = -1;
             int nRowMin = -1;
@@ -753,14 +756,16 @@ namespace RakuRakuMorakun
                 stResult = new string[lGetCount];
             }
 
+            Converter converter = Converter.GetInstance();
+
             //1件はかならずある
-            stResult[lCount++] = Converter.ConvertStrData(stTemplate, this);
+            stResult[lCount++] = converter.ConvertStrData(stTemplate, this);
             //取得予定件数に達したら終了
             if (lCount >= lGetCount) { return stResult; }
             int nRtn = CtpDataTable.NextIndex();
             while (nRtn == (int)INDEX_FLAG.NEXT)
             {
-                stResult[lCount++] = Converter.ConvertStrData(stTemplate, this);
+                stResult[lCount++] = converter.ConvertStrData(stTemplate, this);
                 nRtn = CtpDataTable.NextIndex();
                 //取得予定件数に達したら終了
                 if (lCount >= lGetCount) { return stResult; }

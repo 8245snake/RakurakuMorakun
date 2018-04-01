@@ -21,6 +21,7 @@ namespace RakuRakuMorakun
         {
             controller = new GridController();
             controller.SetDataToGrid(grdMain);
+
             lblCount.Text = string.Format(TEXT_FORMAT_TOTAL_COUNT, controller.Total);
             frmPreview = new frmPreview(this);
 
@@ -35,6 +36,11 @@ namespace RakuRakuMorakun
             grdCondition.Columns[1].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             grdCondition.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             grdCondition.Columns[3].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            //ソートを不可にする
+            for (int i = 0; i < grdMain.ColumnCount; i++) {  grdMain.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable; }
+            for (int i = 0; i < grdSequence.ColumnCount; i++) { grdSequence.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable; }
+            for (int i = 0; i < grdCondition.ColumnCount; i++) { grdCondition.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable; }
 
             UpdateGridData();
         }
@@ -249,6 +255,7 @@ namespace RakuRakuMorakun
         //条件付き文字列グリッドのダブルクリックは編集
         private void grdCondition_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) { return; }
             string stName =grdCondition[0, e.RowIndex].Value.ToString();
 
             frmEditCondition frmC = new frmEditCondition(controller, stName);
@@ -305,6 +312,7 @@ namespace RakuRakuMorakun
         //ダブルクリックは編集
         private void grdSequence_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) { return; }
             string stName = grdSequence[0, e.RowIndex].Value.ToString();
 
             frmEditSequence frmD = new frmEditSequence(controller, stName);
@@ -528,7 +536,5 @@ namespace RakuRakuMorakun
         {
             txtExternal_TextChanged(sender,e);
         }
-
-
     }
 }

@@ -142,6 +142,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sequence.cs" />
+    <Compile Include="SettingData.cs" />
     <EmbeddedResource Include="dialogDatarRcieved.resx">
       <DependentUpon>dialogDatarRcieved.cs</DependentUpon>
     </EmbeddedResource>

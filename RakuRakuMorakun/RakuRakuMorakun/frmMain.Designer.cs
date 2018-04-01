@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.cmdAllGrayOut = new System.Windows.Forms.Button();
             this.cmdInvalid = new System.Windows.Forms.Button();
@@ -59,6 +59,7 @@
             this.Setting = new System.Windows.Forms.ToolStripMenuItem();
             this.menueEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.InputAssist = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddRows = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdDeleteSequence = new System.Windows.Forms.Button();
             this.cmdAddSequence = new System.Windows.Forms.Button();
             this.groupSequence = new System.Windows.Forms.GroupBox();
@@ -70,7 +71,6 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.grdMain = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.AddRows = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdCondition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSequence)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -369,9 +369,16 @@
             // InputAssist
             // 
             this.InputAssist.Name = "InputAssist";
-            this.InputAssist.Size = new System.Drawing.Size(180, 22);
+            this.InputAssist.Size = new System.Drawing.Size(122, 22);
             this.InputAssist.Text = "入力支援";
             this.InputAssist.Click += new System.EventHandler(this.InputAssist_Click);
+            // 
+            // AddRows
+            // 
+            this.AddRows.Name = "AddRows";
+            this.AddRows.Size = new System.Drawing.Size(122, 22);
+            this.AddRows.Text = "行を追加";
+            this.AddRows.Click += new System.EventHandler(this.AddRows_Click);
             // 
             // cmdDeleteSequence
             // 
@@ -482,14 +489,14 @@
             this.grdMain.AllowUserToDeleteRows = false;
             this.grdMain.AllowUserToResizeColumns = false;
             this.grdMain.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.grdMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdMain.Location = new System.Drawing.Point(3, 71);
             this.grdMain.Name = "grdMain";
@@ -509,13 +516,6 @@
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(523, 377);
             this.flowLayoutPanel3.TabIndex = 30;
-            // 
-            // AddRows
-            // 
-            this.AddRows.Name = "AddRows";
-            this.AddRows.Size = new System.Drawing.Size(180, 22);
-            this.AddRows.Text = "行を追加";
-            this.AddRows.Click += new System.EventHandler(this.AddRows_Click);
             // 
             // frmMain
             // 
